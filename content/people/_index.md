@@ -14,7 +14,7 @@ collaborators:
     url: https://www.uib.no/en/michaelsarscentre/114766/chourrout-group
   - name: Yad Ghavi-Helm
     affiliation: Institut de Génomique Fonctionnelle de Lyon (IGFL), France
-    url: https://igfl.ens-lyon.fr/equipes/y.ghavi-helm-developmental-epigenomics
+    url: https://www.ghavihelmlab.com/
 alumni:
   - name: Emily Ito
     role: Rotation Student
@@ -30,19 +30,25 @@ alumni:
     note: now at University of Vienna, Austria
   - name: Raymond Fedrick
     role: Intern
+    note: ''
   - name: Ritika Gupta
     role: Research Intern
+    note: ''
   - name: Estela Moreno
     role: Research Intern
+    note: ''
   - name: Andrew Liu
     role: Research Technician
     note: Nakayama Unit, OIST
   - name: Arina Mazurova
     role: Rotation Student
+    note: ''
   - name: Sara Ikeda
     role: Rotation Student
+    note: ''
   - name: Michael Mansfield
     role: Research Scientist
+    note: ''
   - name: Yutei Takahashi
     role: Rotation Student
     note: Kiyomitsu Unit, OIST
@@ -72,8 +78,10 @@ alumni:
     note: University of Barcelona, Spain
   - name: Maria Sara Del Rio-Pisula
     role: Intern
+    note: ''
   - name: Huyên Pham
     role: Intern
+    note: ''
   - name: Elizaveta Miticheva
     role: Intern
     note: now at Weizmann Institute of Science, Israel
@@ -90,11 +98,14 @@ alumni:
     role: Rotation Student
     note: Doya Unit, OIST
   - name: Jan Grašič
+    role: ''
     note: Kono Unit, OIST
   - name: Saurabh Kumar
     role: Intern
+    note: ''
   - name: Tanmay Rustagi
     role: Intern
+    note: ''
   - name: Charlotte West
     role: Intern
     note: now at EMBL-EBI, Cambridge, UK
