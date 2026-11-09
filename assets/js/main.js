@@ -18,11 +18,17 @@ document.querySelectorAll(".js-email").forEach((a) => {
   a.textContent = addr;
 });
 
-// Contact form: preselect subject from ?subject=phd etc.
-const subject = document.getElementById("f-subject");
-if (subject) {
+// Contact form: preselect topic from ?subject=phd etc., and build the e-mail subject line
+const topic = document.getElementById("f-topic");
+if (topic) {
   const want = new URLSearchParams(location.search).get("subject");
-  if (want && [...subject.options].some((o) => o.value === want)) subject.value = want;
+  if (want && [...topic.options].some((o) => o.value === want)) topic.value = want;
+  const form = topic.form;
+  form.addEventListener("submit", () => {
+    const label = topic.options[topic.selectedIndex].text;
+    const name = (form.elements.name.value || "").trim();
+    form.elements.subject.value = `Luscombe Lab website: ${label}${name ? ` from ${name}` : ""}`;
+  });
 }
 
 // YouTube: load the player only when clicked

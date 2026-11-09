@@ -5,14 +5,16 @@
     {{- /* Netlify Forms: detected at deploy time from this markup; submissions appear under Forms in the Netlify dashboard. */}}
     <form class="card contact-form" name="contact" method="POST" action="{{ "/contact/thanks/" | relURL }}" data-netlify="true" netlify-honeypot="company_website">
       <input type="hidden" name="form-name" value="contact">
+      {{- /* Netlify uses a field named "subject" as the notification e-mail subject (overrides the dashboard setting). main.js fills in topic + name. */}}
+      <input type="hidden" name="subject" data-remove-prefix value="Luscombe Lab website: new message (%{submissionId})">
       <p class="hp" aria-hidden="true"><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>
       <div class="field-row">
         <p class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" required autocomplete="name"></p>
         <p class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" required autocomplete="email"></p>
       </div>
       <p class="field"><label for="f-aff">Affiliation <span class="muted">(optional)</span></label><input id="f-aff" name="affiliation" type="text" autocomplete="organization"></p>
-      <p class="field"><label for="f-subject">Subject</label>
-        <select id="f-subject" name="subject" required>
+      <p class="field"><label for="f-topic">Topic</label>
+        <select id="f-topic" name="topic" required>
           <option value="general">General enquiry</option>
           <option value="phd">PhD / rotation</option>
           <option value="internship">Research internship</option>
