@@ -1,0 +1,8 @@
+{{- /* "Nicholas M. Luscombe" and "NM Luscombe" both -> "luscombe|n" (surname + first initial). */ -}}
+{{- $n := replaceRE `[.,]` " " (string .) | strings.TrimSpace -}}
+{{- $parts := split (replaceRE `\s+` " " $n) " " -}}
+{{- $key := "" -}}
+{{- if gt (len $parts) 1 -}}
+  {{- $key = printf "%s|%s" (lower (index $parts (sub (len $parts) 1))) (lower (substr (index $parts 0) 0 1)) -}}
+{{- end -}}
+{{- return $key -}}

@@ -1,0 +1,7 @@
+{{- /* Renders "user(at)domain" as text; main.js turns it into a mailto: link so the plain address is not in the HTML. */ -}}
+{{- $parts := split . "(at)" -}}
+{{- if eq (len $parts) 2 -}}
+<a class="js-email" href="{{ "/contact/" | relURL }}" data-u="{{ index $parts 0 }}" data-d="{{ index $parts 1 }}">{{ . }}</a>
+{{- else -}}
+<a href="mailto:{{ . }}">{{ . }}</a>
+{{- end -}}

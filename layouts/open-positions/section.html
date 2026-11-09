@@ -1,0 +1,55 @@
+{{ define "main" }}
+{{ partial "page-head.html" . }}
+<section class="section">
+  <div class="wrap positions-grid">
+    <div class="prose">
+      {{ .Content }}
+    </div>
+    {{ with .Params.image }}
+    <figure class="positions-figure">
+      {{ partial "img.html" (dict "src" . "alt" ($.Params.image_alt | default "") "widths" (slice 600 900 1200) "sizes" "(min-width: 900px) 40vw, 100vw") }}
+    </figure>
+    {{ end }}
+  </div>
+</section>
+
+{{ $open := where (.Params.positions | default slice) "open" true }}
+{{ with $open }}
+<section class="section section-tint">
+  <div class="wrap">
+    <h2 class="section-title">Current openings</h2>
+    <div class="resource-grid">
+      {{ range . }}
+      <article class="card position">
+        <p class="eyebrow">{{ .type }}</p>
+        <h3>{{ .title }}</h3>
+        {{ with .description }}<p>{{ . | markdownify }}</p>{{ end }}
+        {{ with .deadline }}<p class="muted">Deadline: {{ time.Format "2 January 2006" . }}</p>{{ end }}
+        {{ with .link }}<p><a class="arrow-link" href="{{ . }}" target="_blank" rel="noopener">Details &amp; how to apply</a></p>{{ end }}
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ with .Params.apply_links }}
+<section class="section{{ if not $open }} section-tint{{ end }}">
+  <div class="wrap">
+    <h2 class="section-title">How to apply</h2>
+    <div class="resource-grid">
+      {{ range . }}
+      <article class="card apply">
+        <h3><a href="{{ .url }}" target="_blank" rel="noopener">{{ .label }}</a></h3>
+        {{ with .description }}<p>{{ . | markdownify }}</p>{{ end }}
+        <p class="apply-actions">
+          <a class="arrow-link" href="{{ .url }}" target="_blank" rel="noopener">Learn more</a>
+          {{ with .subject }}<a class="arrow-link" href="{{ "/contact/" | relURL }}?subject={{ . }}">Contact us</a>{{ end }}
+        </p>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

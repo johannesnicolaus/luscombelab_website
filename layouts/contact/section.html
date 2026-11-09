@@ -1,0 +1,40 @@
+{{ define "main" }}
+{{ partial "page-head.html" . }}
+<section class="section">
+  <div class="wrap contact-grid">
+    {{- /* Netlify Forms: detected at deploy time from this markup; submissions appear under Forms in the Netlify dashboard. */}}
+    <form class="card contact-form" name="contact" method="POST" action="{{ "/contact/thanks/" | relURL }}" data-netlify="true" netlify-honeypot="company_website">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hp" aria-hidden="true"><label>Leave this empty <input name="company_website" tabindex="-1" autocomplete="off"></label></p>
+      <div class="field-row">
+        <p class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" required autocomplete="name"></p>
+        <p class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" required autocomplete="email"></p>
+      </div>
+      <p class="field"><label for="f-aff">Affiliation <span class="muted">(optional)</span></label><input id="f-aff" name="affiliation" type="text" autocomplete="organization"></p>
+      <p class="field"><label for="f-subject">Subject</label>
+        <select id="f-subject" name="subject" required>
+          <option value="general">General enquiry</option>
+          <option value="phd">PhD / rotation</option>
+          <option value="internship">Research internship</option>
+          <option value="postdoc">Postdoc / staff position</option>
+          <option value="collaboration">Collaboration</option>
+          <option value="resources">Data &amp; resources access</option>
+        </select>
+      </p>
+      <p class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" rows="7" required></textarea></p>
+      <p><button class="btn" type="submit">Send message</button></p>
+    </form>
+
+    <aside class="contact-info">
+      <div class="card">
+        <h2>Get in touch</h2>
+        <p><strong>Prof. Nicholas M. Luscombe</strong><br>{{ site.Params.unit }}</p>
+        <p>{{ partial "email.html" site.Params.email }}</p>
+        <h3>Address</h3>
+        <p>{{ site.Params.institution }}<br>{{ site.Params.address }}</p>
+        {{ with .Params.map_url }}<p><a class="arrow-link" href="{{ . }}" target="_blank" rel="noopener">Open in Google Maps</a></p>{{ end }}
+      </div>
+    </aside>
+  </div>
+</section>
+{{ end }}

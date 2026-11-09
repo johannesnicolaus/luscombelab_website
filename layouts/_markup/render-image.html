@@ -1,0 +1,2 @@
+{{- /* Images inserted in Markdown bodies via the CMS (e.g. /uploads/foo.jpg) get resized like the rest of the site. */ -}}
+{{- partial "img.html" (dict "src" .Destination "alt" .PlainText "widths" (slice 600 1000 1400) "sizes" "(min-width: 760px) 720px, 100vw" "class" "content-img") -}}

@@ -1,0 +1,70 @@
+{{ define "main" }}
+{{ partial "page-head.html" . }}
+
+{{ with .Params.group_photo }}
+<section class="section section-flush">
+  <div class="wrap group-photo">
+    {{ partial "img.html" (dict "src" . "alt" ($.Params.group_photo_alt | default "Lab group photo") "widths" (slice 800 1200 1600 2000) "sizes" "(min-width: 1180px) 1120px, 100vw" "eager" true) }}
+  </div>
+</section>
+{{ end }}
+
+{{ $current := where .RegularPages "Params.former" "!=" true }}
+{{ $groups := site.Params.peopleGroups }}
+<section class="section">
+  <div class="wrap">
+    {{ range $groups }}
+      {{ $g := . }}
+      {{ with where $current "Params.group" $g }}
+      <div class="people-group">
+        <h2 class="section-title">{{ $g }}</h2>
+        <div class="people-grid">
+          {{ range .ByWeight }}{{ partial "person-card.html" . }}{{ end }}
+        </div>
+      </div>
+      {{ end }}
+    {{ end }}
+    {{- /* members whose group is missing or not in the list */}}
+    {{ $other := slice }}
+    {{ range $current }}{{ if not (in $groups .Params.group) }}{{ $other = $other | append . }}{{ end }}{{ end }}
+    {{ with $other }}
+    <div class="people-group">
+      <h2 class="section-title">Members</h2>
+      <div class="people-grid">
+        {{ range (sort . "Weight") }}{{ partial "person-card.html" . }}{{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+{{ with .Params.collaborators }}
+<section class="section section-tint">
+  <div class="wrap">
+    <h2 class="section-title">Collaborators</h2>
+    <ul class="collab-list">
+      {{ range . }}
+      <li>{{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>{{ else }}<strong>{{ .name }}</strong>{{ end }}{{ with .affiliation }}<span class="muted">{{ . }}</span>{{ end }}</li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}
+
+{{ $formerPages := where .RegularPages "Params.former" true }}
+{{ if or .Params.alumni $formerPages }}
+<section class="section">
+  <div class="wrap">
+    <h2 class="section-title">Former members</h2>
+    <ul class="alumni-list">
+      {{ range $formerPages.ByWeight }}
+      <li><strong>{{ .Title }}</strong>{{ with .Params.role }}, {{ . }}{{ end }}{{ with .Params.former_note }} <span class="muted">({{ . }})</span>{{ end }}</li>
+      {{ end }}
+      {{ range .Params.alumni }}
+      <li><strong>{{ .name }}</strong>{{ with .role }}, {{ . }}{{ end }}{{ with .note }} <span class="muted">({{ . }})</span>{{ end }}</li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}
+{{ end }}

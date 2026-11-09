@@ -1,0 +1,42 @@
+name: Update publications
+
+on:
+  schedule:
+    - cron: "0 18 * * 0"   # every Monday 03:00 JST
+  workflow_dispatch:        # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-publications
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch publications from OpenAlex and PubMed
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
+          NCBI_API_KEY: ${{ secrets.NCBI_API_KEY }}
+        run: python3 scripts/fetch_publications.py
+
+      - name: Commit changes (if any)
+        run: |
+          if git diff --quiet -- data/publications_auto.json; then
+            echo "No changes to the publication list."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/publications_auto.json
+          git commit -m "Update publication list from OpenAlex/PubMed"
+          git push

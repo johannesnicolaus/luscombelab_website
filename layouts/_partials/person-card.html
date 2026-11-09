@@ -1,0 +1,24 @@
+{{- $name := .Title -}}
+{{- $hasBio := strings.TrimSpace (string .RawContent) -}}
+<article class="person card{{ if not $hasBio }} person-compact{{ end }}" id="{{ .File.ContentBaseName }}">
+  <div class="person-photo">
+    {{- with .Params.photo }}
+      {{- partial "img.html" (dict "src" . "alt" $name "ratio" "1:1" "widths" (slice 320 480 640) "sizes" "(min-width: 720px) 220px, 40vw") }}
+    {{- else }}
+      <span class="person-initials" aria-hidden="true">{{ range first 2 (split (replaceRE `^[A-Z]\.\s+` "" $name) " ") }}{{ substr . 0 1 }}{{ end }}</span>
+    {{- end }}
+  </div>
+  <div class="person-body">
+    <h3>{{ $name }}</h3>
+    {{ with .Params.role }}<p class="person-role">{{ . }}</p>{{ end }}
+    {{ with .Params.links }}
+    <p class="person-links">
+      {{ with .scholar }}<a href="{{ . }}" target="_blank" rel="noopener">Google Scholar</a>{{ end }}
+      {{ with .orcid }}<a href="{{ . }}" target="_blank" rel="noopener">ORCID</a>{{ end }}
+      {{ with .github }}<a href="{{ . }}" target="_blank" rel="noopener">GitHub</a>{{ end }}
+      {{ with .website }}<a href="{{ . }}" target="_blank" rel="noopener">Website</a>{{ end }}
+    </p>
+    {{ end }}
+    {{ with .Content }}<div class="person-bio">{{ . }}</div>{{ end }}
+  </div>
+</article>

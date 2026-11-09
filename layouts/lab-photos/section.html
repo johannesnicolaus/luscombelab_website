@@ -1,0 +1,24 @@
+{{ define "main" }}
+{{ partial "page-head.html" . }}
+<section class="section">
+  <div class="wrap">
+    {{ range .RegularPages.ByWeight }}
+    {{ $album := . }}
+    <section class="album" id="{{ .File.ContentBaseName }}">
+      <div class="album-head">
+        <h2>{{ .Title }}</h2>
+        {{ with .Date }}{{ if not .IsZero }}<time class="muted" datetime="{{ .Format "2006-01-02" }}">{{ .Format "January 2006" }}</time>{{ end }}{{ end }}
+      </div>
+      {{ with .Params.description }}<p class="album-desc">{{ . | markdownify }}</p>{{ end }}
+      <div class="photo-grid">
+        {{ range .Params.photos }}
+        <figure>
+          {{ partial "img.html" (dict "src" .image "alt" (.caption | default $album.Title) "ratio" "4:3" "widths" (slice 400 600 900) "sizes" "(min-width: 1000px) 340px, (min-width: 600px) 45vw, 100vw" "link" true "group" $album.File.ContentBaseName "caption" (.caption | default $album.Title)) }}
+        </figure>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,72 @@
+baseURL = "https://luscombelab.netlify.app/"   # change when the custom domain is set
+locale = "en"
+title = "Luscombe Lab"
+enableRobotsTXT = true
+summaryLength = 30
+disableKinds = ["taxonomy", "term"]
+
+# Member and album pages are shown on their section page only (no page of their own).
+[[cascade]]
+  [cascade.build]
+    render = "never"
+    list = "always"
+  [cascade.target]
+    kind = "page"
+    path = "{/people/**,/lab-photos/**}"
+
+[params]
+  # Order of member groups on the People page (must match the "Group" options in static/admin/config.yml)
+  peopleGroups = ["Professor", "Scientists", "Technicians", "Students", "Interns", "Visiting researchers", "Administration"]
+  unit = "Genomics and Regulatory Systems Unit"
+  institution = "Okinawa Institute of Science and Technology (OIST)"
+  description = "The Luscombe Lab (Genomics and Regulatory Systems Unit, OIST) studies gene regulation, genome evolution and population genomics of the marine larvacean Oikopleura dioica."
+  email = "nicholas.luscombe(at)oist.jp"
+  address = "1919-1 Tancha, Onna, Kunigami District, Okinawa 904-0495, Japan"
+  orcid = "0000-0001-5293-4778"
+  oistUrl = "https://www.oist.jp/research/research-units/grsu"
+
+[menus]
+  [[menus.main]]
+    name = "Home"
+    pageRef = "/"
+    weight = 10
+  [[menus.main]]
+    name = "People"
+    pageRef = "/people"
+    weight = 20
+  [[menus.main]]
+    name = "Publications"
+    pageRef = "/publications"
+    weight = 30
+  [[menus.main]]
+    name = "Lab Photos"
+    pageRef = "/lab-photos"
+    weight = 40
+  [[menus.main]]
+    name = "Plankton Gallery"
+    pageRef = "/plankton-gallery"
+    weight = 50
+  [[menus.main]]
+    name = "Resources"
+    pageRef = "/resources"
+    weight = 60
+  [[menus.main]]
+    name = "Open Positions"
+    pageRef = "/open-positions"
+    weight = 70
+  [[menus.main]]
+    name = "Contact"
+    pageRef = "/contact"
+    weight = 80
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[imaging]
+  resampleFilter = "Lanczos"
+  anchor = "Smart"
+  [imaging.jpeg]
+    quality = 82
+  [imaging.webp]
+    quality = 80
+

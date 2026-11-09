@@ -1,0 +1,348 @@
+# Sveltia CMS configuration — https://sveltiacms.app/en/docs
+# Editors log in at https://<your-site>/admin/ with their GitHub account
+# (they need write access to the repository). See docs/SETUP.md.
+
+backend:
+  name: github
+  repo: johannesnicolaus/luscombelab_website
+  branch: main
+  # No base_url: on Netlify the CMS uses Netlify's GitHub OAuth (see docs/SETUP.md).
+  commit_messages:
+    create: "Create {{collection}} “{{slug}}”"
+    update: "Update {{collection}} “{{slug}}”"
+    delete: "Delete {{collection}} “{{slug}}”"
+    uploadMedia: "Upload “{{path}}”"
+    deleteMedia: "Delete “{{path}}”"
+
+site_url: https://luscombelab.netlify.app
+display_url: https://luscombelab.netlify.app
+
+# Uploaded images go to assets/uploads; Hugo resizes and converts them to WebP when building.
+media_folder: assets/uploads
+public_folder: /uploads
+
+collections:
+  # ---------------------------------------------------------------- People
+  - name: people
+    label: People
+    label_singular: Person
+    description: One entry per lab member. Set "Former member" to move someone to the alumni list.
+    folder: content/people
+    create: true
+    slug: "{{title}}"
+    identifier_field: title
+    summary: "{{title}} — {{role}}{{former | ternary(' (former)', '')}}"
+    sortable_fields: [weight, title, role]
+    media_folder: /assets/uploads/people
+    public_folder: /uploads/people
+    fields:
+      - { name: title, label: Name, widget: string }
+      - { name: role, label: Role, widget: string, hint: "e.g. Research Scientist, PhD Student, Research Intern" }
+      - name: group
+        label: Group on the People page
+        widget: select
+        default: Scientists
+        options: [Professor, Scientists, Technicians, Students, Interns, Visiting researchers, Administration]
+      - { name: photo, label: Photo, widget: image, required: false, hint: "Square-ish portrait works best; it is cropped to a square automatically." }
+      - { name: weight, label: Order, widget: number, value_type: int, default: 100, hint: "Lower numbers are shown first." }
+      - { name: former, label: Former member, widget: boolean, default: false }
+      - { name: former_note, label: Former member note, widget: string, required: false, hint: "Only for former members, e.g. 'now at EMBL-EBI'." }
+      - name: links
+        label: Links
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { name: scholar, label: Google Scholar URL, widget: string, required: false }
+          - { name: orcid, label: ORCID URL, widget: string, required: false }
+          - { name: github, label: GitHub URL, widget: string, required: false }
+          - { name: website, label: Personal website, widget: string, required: false }
+      - name: publication_names
+        label: Name variants in publications
+        widget: list
+        required: false
+        hint: "Optional. Extra spellings used to bold this person in the publication list, e.g. 'G Sanchez-Serna'. Surname + first initial is matched automatically."
+        field: { name: name, label: Name, widget: string }
+      - { name: body, label: Bio, widget: markdown }
+
+  # ---------------------------------------------------------------- Lab photos
+  - name: albums
+    label: Lab Photos
+    label_singular: Album
+    description: Each album is shown as a section on the Lab Photos page.
+    folder: content/lab-photos
+    create: true
+    slug: "{{title}}"
+    identifier_field: title
+    sortable_fields: [weight, title, date]
+    media_folder: /assets/uploads/photos
+    public_folder: /uploads/photos
+    fields:
+      - { name: title, label: Album title, widget: string }
+      - { name: weight, label: Order, widget: number, value_type: int, default: 100, hint: "Lower numbers are shown first. Use small numbers for new albums to put them on top." }
+      - { name: date, label: Date, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false }
+      - { name: description, label: Description, widget: text, required: false }
+      - name: photos
+        label: Photos
+        widget: list
+        add_to_top: false
+        fields:
+          - { name: image, label: Image, widget: image }
+          - { name: caption, label: Description, widget: string, required: false, hint: "Not shown under the photo; used for screen readers and in the enlarged view." }
+
+  # ---------------------------------------------------------------- Publications
+  - name: publications
+    label: Publications
+    description: The full list updates automatically every week from OpenAlex and PubMed. Use this to pick featured papers, hide wrong matches, or add missing ones.
+    files:
+      - name: settings
+        label: Selected, hidden & manual publications
+        file: data/publications.yaml
+        fields:
+          - name: selected
+            label: Selected publications
+            widget: list
+            required: false
+            hint: "DOIs (e.g. 10.1101/gr.278295.123) or PubMed IDs shown at the top of the page, in this order."
+            field: { name: id, label: DOI or PMID, widget: string }
+          - name: hidden
+            label: Hidden publications
+            widget: list
+            required: false
+            hint: "Automatic entries to remove (e.g. a paper by a different N. Luscombe)."
+            fields:
+              - { name: id, label: DOI or PMID, widget: string }
+              - { name: note, label: Reason, widget: string, required: false }
+          - name: manual
+            label: Manual entries
+            widget: list
+            required: false
+            hint: "Papers missing from the automatic list. An entry with the same DOI as an automatic one replaces it (useful for corrections)."
+            summary: "{{year}} — {{title}}"
+            fields:
+              - { name: title, label: Title, widget: string, hint: "Use *asterisks* for italics, e.g. *Oikopleura dioica*." }
+              - { name: authors, label: Authors, widget: string, hint: "Comma-separated, e.g. 'C Plessy, MJ Mansfield, NM Luscombe'" }
+              - { name: venue, label: Journal / book, widget: string, required: false }
+              - { name: year, label: Year, widget: number, value_type: int }
+              - name: type
+                label: Type
+                widget: select
+                default: article
+                options:
+                  - { label: Article, value: article }
+                  - { label: Review, value: review }
+                  - { label: Preprint, value: preprint }
+                  - { label: Book chapter, value: book-chapter }
+                  - { label: Book, value: book }
+                  - { label: Conference paper, value: conference-paper }
+              - { name: doi, label: DOI, widget: string, required: false }
+              - { name: pmid, label: PubMed ID, widget: string, required: false }
+              - { name: volume, label: Volume, widget: string, required: false }
+              - { name: pages, label: Pages, widget: string, required: false }
+              - { name: url, label: Link (if no DOI), widget: string, required: false }
+              - { name: pdf, label: Full text / PDF link, widget: string, required: false }
+              - { name: code, label: Code link, widget: string, required: false }
+              - { name: data, label: Data link, widget: string, required: false }
+              - { name: note, label: Note, widget: string, required: false, hint: "e.g. '*equal contribution' or 'Cover article'" }
+      - name: page
+        label: Publications page text
+        file: content/publications/_index.md
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: intro, label: Introduction, widget: text, required: false }
+          - { name: covers_title, label: Covers heading, widget: string, required: false, default: Journal covers }
+          - name: covers
+            label: Journal covers
+            widget: list
+            required: false
+            summary: "{{year}} — {{journal}}"
+            hint: "Shown on the Publications page, grouped by year. Clicking a cover opens the article."
+            media_folder: /assets/uploads/covers
+            public_folder: /uploads/covers
+            fields:
+              - { name: image, label: Cover image, widget: image }
+              - { name: journal, label: Journal, widget: string }
+              - { name: issue, label: Issue, widget: string, required: false, hint: "e.g. Vol. 16, Issue 9" }
+              - { name: year, label: Year, widget: number, value_type: int }
+              - { name: doi, label: DOI of the featured article, widget: string, required: false }
+              - { name: url, label: Link (if no DOI), widget: string, required: false }
+
+  # ---------------------------------------------------------------- Pages
+  - name: pages
+    label: Pages
+    description: Text and settings for each page of the site.
+    files:
+      - name: home
+        label: Home
+        file: content/_index.md
+        media_folder: /assets/uploads/home
+        public_folder: /uploads/home
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: tagline, label: Tagline, widget: text }
+          - { name: hero_image, label: Main image, widget: image }
+          - { name: hero_alt, label: Main image description (for screen readers), widget: string, required: false }
+          - { name: body, label: Introduction, widget: markdown }
+          - name: questions
+            label: Key questions
+            widget: list
+            required: false
+            field: { name: question, label: Question, widget: text }
+          - { name: outro, label: Text after the questions, widget: text, required: false }
+          - name: research_topics
+            label: Research topics
+            widget: list
+            summary: "{{title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: text, label: Description, widget: text }
+              - { name: reference, label: Key reference (optional), widget: string, required: false }
+              - { name: reference_url, label: Reference link, widget: string, required: false }
+          - { name: videos_title, label: Videos heading, widget: string, required: false, default: Videos }
+          - name: videos
+            label: Videos on the home page
+            widget: list
+            required: false
+            summary: "{{title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: youtube, label: YouTube video ID, widget: string, hint: "The part after watch?v= in the YouTube link" }
+              - { name: start, label: Start at (seconds), widget: number, value_type: int, required: false }
+          - { name: show_latest_publications, label: Number of latest publications to show, widget: number, value_type: int, default: 4 }
+
+      - name: people_page
+        label: People page (group photo, collaborators, alumni)
+        file: content/people/_index.md
+        media_folder: /assets/uploads/people
+        public_folder: /uploads/people
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: group_photo, label: Group photo, widget: image, required: false }
+          - { name: group_photo_alt, label: Group photo description (for screen readers), widget: string, required: false }
+          - name: collaborators
+            label: Collaborators
+            widget: list
+            required: false
+            summary: "{{name}} — {{affiliation}}"
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: affiliation, label: Affiliation, widget: string, required: false }
+              - { name: url, label: Website, widget: string, required: false }
+          - name: alumni
+            label: Former members (list)
+            widget: list
+            required: false
+            summary: "{{name}}, {{role}}"
+            hint: "Simple list of former members. Alternatively, open the person's entry under People and tick 'Former member'."
+            fields:
+              - { name: name, label: Name, widget: string }
+              - { name: role, label: Role, widget: string, required: false }
+              - { name: note, label: Note, widget: string, required: false, hint: "e.g. 'now at Wellcome Sanger Institute, UK'" }
+
+      - name: lab_photos_page
+        label: Lab Photos page text
+        file: content/lab-photos/_index.md
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: intro, label: Introduction, widget: text, required: false }
+
+      - name: plankton
+        label: Plankton Gallery
+        file: content/plankton-gallery/_index.md
+        media_folder: /assets/uploads/plankton
+        public_folder: /uploads/plankton
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: intro, label: Introduction, widget: text, required: false }
+          - { name: featured_title, label: Featured videos heading, widget: string, required: false }
+          - name: featured
+            label: Featured YouTube videos
+            widget: list
+            required: false
+            summary: "{{title}}"
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: youtube, label: YouTube video ID, widget: string, hint: "The part after watch?v= in the YouTube link, e.g. idUusw1INV0" }
+              - { name: start, label: Start at (seconds), widget: number, value_type: int, required: false }
+          - { name: items_title, label: Gallery heading, widget: string, required: false, default: "Videos & images" }
+          - name: items
+            label: Gallery items
+            widget: list
+            required: false
+            summary: "{{title}}"
+            hint: "Each item is a YouTube video, an uploaded video file (MP4) or an image."
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: caption, label: Caption, widget: string, required: false }
+              - { name: youtube, label: YouTube video ID, widget: string, required: false }
+              - { name: start, label: Start at (seconds), widget: number, value_type: int, required: false }
+              - { name: video, label: Video file (MP4), widget: file, required: false, hint: "Keep clips short (under ~20 MB)." }
+              - { name: poster, label: Video thumbnail, widget: image, required: false }
+              - { name: image, label: Image (instead of a video), widget: image, required: false }
+
+      - name: resources
+        label: Resources
+        file: content/resources/_index.md
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: intro, label: Introduction, widget: text, required: false }
+          - name: groups
+            label: Groups
+            widget: list
+            summary: "{{title}}"
+            fields:
+              - { name: title, label: Group title, widget: string }
+              - name: items
+                label: Resources
+                widget: list
+                summary: "{{name}}"
+                fields:
+                  - { name: name, label: Name, widget: string }
+                  - { name: url, label: Link, widget: string }
+                  - { name: description, label: Description, widget: text, required: false }
+
+      - name: open_positions
+        label: Open Positions
+        file: content/open-positions/_index.md
+        media_folder: /assets/uploads/positions
+        public_folder: /uploads/positions
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: image, label: Image, widget: image, required: false }
+          - { name: image_alt, label: Image description (for screen readers), widget: string, required: false }
+          - { name: body, label: Main text, widget: markdown }
+          - name: positions
+            label: Current openings
+            widget: list
+            required: false
+            summary: "{{title}}{{open | ternary('', ' (closed)')}}"
+            hint: "Specific positions. Untick 'Open' to hide one without deleting it."
+            fields:
+              - { name: title, label: Position title, widget: string }
+              - { name: type, label: Type, widget: select, options: [Postdoc, PhD, Internship, Technician, Staff, Other] }
+              - { name: description, label: Description, widget: text, required: false }
+              - { name: deadline, label: Deadline, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false }
+              - { name: link, label: Link to advert, widget: string, required: false }
+              - { name: open, label: Open, widget: boolean, default: true }
+          - name: apply_links
+            label: How to apply (cards)
+            widget: list
+            required: false
+            summary: "{{label}}"
+            fields:
+              - { name: label, label: Title, widget: string }
+              - { name: url, label: Link, widget: string }
+              - { name: description, label: Description, widget: text, required: false }
+              - name: subject
+                label: Contact form subject
+                widget: select
+                required: false
+                options: [general, phd, internship, postdoc, collaboration, resources]
+
+      - name: contact
+        label: Contact
+        file: content/contact/_index.md
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: intro, label: Introduction, widget: text, required: false }
+          - { name: map_url, label: Map link, widget: string, required: false }

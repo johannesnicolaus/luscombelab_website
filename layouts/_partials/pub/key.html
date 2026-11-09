@@ -1,0 +1,9 @@
+{{- /* Normalize a DOI / PMID / doi.org or PubMed URL to "doi:…" or "pmid:…". */ -}}
+{{- $s := lower (strings.TrimSpace (string .)) -}}
+{{- $s = replaceRE `^https?://(dx\.)?doi\.org/` "doi:" $s -}}
+{{- $s = replaceRE `^https?://(www\.)?(pubmed\.ncbi\.nlm\.nih\.gov|ncbi\.nlm\.nih\.gov/pubmed)/(\d+).*$` "pmid:$3" $s -}}
+{{- $s = replaceRE `^(doi|pmid):\s*` "$1:" $s -}}
+{{- if findRE `^\d+$` $s -}}{{- $s = printf "pmid:%s" $s -}}
+{{- else if hasPrefix $s "10." -}}{{- $s = printf "doi:%s" $s -}}
+{{- end -}}
+{{- return $s -}}

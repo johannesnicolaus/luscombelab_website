@@ -1,0 +1,40 @@
+# Edited through the CMS (Publications → Settings & manual entries).
+# The automatic list (data/publications_auto.json) is fetched weekly from OpenAlex + PubMed.
+#
+# selected: DOIs (or PMIDs) shown in "Selected publications" at the top, in this order.
+# hidden:   DOIs/PMIDs to remove from the automatic list (e.g. wrong-author matches).
+# manual:   extra publications, or corrections; a manual entry with the same DOI
+#           as an automatic one replaces it.
+selected:
+  - 10.1093/gbe/evae182
+  - 10.1101/gr.278295.123
+  - 10.1007/s00227-022-04145-5
+  - 10.12688/f1000research.109251.1
+  - 10.1186/s12864-021-07512-6
+  - 10.12688/f1000research.25019.2
+  - 10.3791/61279
+  - 10.1038/s41598-020-61591-1
+  - 10.12688/f1000research.21551.2
+  - 10.1186/s13059-018-1582-2
+  - 10.1101/gr.231449.117
+hidden:
+  - id: 10.1038/s44384-026-00048-7
+    note: "Visual-auditory interactions paper - likely a different N. Luscombe (please confirm)"
+manual:
+  - title: Pathways to an integrated understanding of marine environments and ecosystems in the Asia-Pacific Region
+    authors: H Adiwira, S Yasunaka, JM Kass, AHO Açıkbaş, S Adiningsih, E Gairin, HBC Ilham, E Lahcene, Y Li, G Nishihira, P Peñalver-Pereira, FMP Sie, CL Amedo-Repollo, CL Ames, D Armitage, Å Brännström, U Dieckmann, T Fujii, F Husnik, M Kawamiya, T Masuda, C Plessy, L Sallan, T Shimada, SL Smith, PG Strutton, A Wirasatriya, T Suga
+    venue: Frontiers in Marine Science
+    year: 2025
+    type: article
+    doi: 10.3389/fmars.2025.1680145
+    volume: "12"
+    pages: "1680145"
+    note: Perspective
+  - title: Transforming Life Science Through Chromosome-Level Genome Assemblies
+    authors: T Kon, K Kataoka, YJ Luo, JN Wibisana, K Toga, N Uno, Y Monden, M Hamada
+    venue: Genes to Cells
+    year: 2026
+    type: review
+    doi: 10.1111/gtc.70145
+    volume: "31"
+    pages: e70145

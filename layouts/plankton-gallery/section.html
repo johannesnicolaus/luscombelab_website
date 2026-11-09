@@ -1,0 +1,49 @@
+{{ define "main" }}
+{{ partial "page-head.html" . }}
+
+{{ with .Params.featured }}
+<section class="section">
+  <div class="wrap">
+    {{ with $.Params.featured_title }}<h2 class="section-title">{{ . | markdownify }}</h2>{{ end }}
+    <div class="video-grid">
+      {{ range . }}
+      <figure class="video-card">
+        {{ partial "youtube.html" (dict "id" .youtube "start" .start "title" (.title | markdownify | plainify)) }}
+        <figcaption>{{ .title | markdownify }}</figcaption>
+      </figure>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ with .Params.items }}
+<section class="section section-tint">
+  <div class="wrap">
+    <h2 class="section-title">{{ $.Params.items_title | default "Videos & images" }}</h2>
+    <div class="media-grid">
+      {{ range . }}
+      {{ $item := . }}
+      {{ $title := .title | default "" | markdownify | plainify }}
+      <figure class="media-card">
+        {{ if .youtube }}
+          {{ partial "youtube.html" (dict "id" .youtube "start" .start "title" $title) }}
+        {{ else if .video }}
+          {{ $poster := "" }}
+          {{ with .poster }}{{ with resources.Get (strings.TrimPrefix "/" .) }}{{ $poster = (.Resize "960x webp q80").RelPermalink }}{{ end }}{{ end }}
+          {{ $v := "" }}
+          {{ if strings.HasPrefix .video "http" }}{{ $v = .video }}{{ else }}{{ with resources.Get (strings.TrimPrefix "/" .video) }}{{ $v = .RelPermalink }}{{ end }}{{ end }}
+          <video controls playsinline muted loop preload="none"{{ with $poster }} poster="{{ . }}"{{ end }} aria-label="{{ $title }}">
+            <source src="{{ $v }}">
+          </video>
+        {{ else }}
+          {{ partial "img.html" (dict "src" (.image | default .poster) "alt" $title "ratio" "16:9" "widths" (slice 480 720 960) "sizes" "(min-width: 1000px) 340px, (min-width: 600px) 45vw, 100vw" "link" true "group" "plankton" "caption" $title) }}
+        {{ end }}
+        {{ with .title }}<figcaption>{{ . | markdownify }}{{ with $item.caption }} <span class="muted">{{ . | markdownify }}</span>{{ end }}</figcaption>{{ end }}
+      </figure>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

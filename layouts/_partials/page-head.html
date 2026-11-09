@@ -1,0 +1,6 @@
+<header class="page-head">
+  <div class="wrap">
+    <h1>{{ .Title | markdownify }}</h1>
+    {{- with .Params.intro }}<p class="lede">{{ . | markdownify }}</p>{{ end }}
+  </div>
+</header>

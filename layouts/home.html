@@ -1,0 +1,102 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="eyebrow">{{ site.Title }} · OIST</p>
+      <h1>{{ .Title | markdownify }}</h1>
+      {{ with .Params.tagline }}<p class="hero-tagline">{{ . | markdownify }}</p>{{ end }}
+      <p class="hero-actions">
+        <a class="btn btn-light" href="#research">Our research</a>
+        <a class="btn btn-ghost" href="{{ "/open-positions/" | relURL }}">Join us</a>
+      </p>
+    </div>
+    {{ with .Params.hero_image }}
+    <figure class="hero-figure">
+      {{ partial "img.html" (dict "src" . "alt" ($.Params.hero_alt | default "") "widths" (slice 600 900 1200) "sizes" "(min-width: 900px) 45vw, 100vw" "eager" true) }}
+    </figure>
+    {{ end }}
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap narrow prose">
+    {{ .Content }}
+  </div>
+  {{ with .Params.questions }}
+  <div class="wrap">
+    <ol class="questions">
+      {{ range . }}<li><span>{{ . | markdownify }}</span></li>{{ end }}
+    </ol>
+  </div>
+  {{ end }}
+  {{ with .Params.outro }}
+  <div class="wrap narrow prose"><p>{{ . | markdownify }}</p>
+    <p><a class="arrow-link" href="{{ "/plankton-gallery/" | relURL }}">Meet <em>Oikopleura dioica</em> in the plankton gallery</a></p>
+  </div>
+  {{ end }}
+</section>
+
+{{ with .Params.videos }}
+<section class="section section-tint">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">{{ $.Params.videos_title | default "Videos" }}</h2>
+      <a class="arrow-link" href="{{ "/plankton-gallery/" | relURL }}">Plankton gallery</a>
+    </div>
+    <div class="video-grid video-grid-2">
+      {{ range . }}
+      <figure class="video-card">
+        {{ partial "youtube.html" (dict "id" .youtube "start" .start "title" (.title | markdownify | plainify)) }}
+        <figcaption>{{ .title | markdownify }}</figcaption>
+      </figure>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ with .Params.research_topics }}
+<section class="section" id="research">
+  <div class="wrap">
+    <h2 class="section-title">Research topics</h2>
+    <div class="topic-grid">
+      {{ range $i, $t := . }}
+      <article class="card topic">
+        <span class="topic-num">{{ printf "%02d" (add $i 1) }}</span>
+        <h3>{{ $t.title | markdownify }}</h3>
+        <p>{{ $t.text | markdownify }}</p>
+        {{ with $t.reference }}<p class="topic-ref">{{ if $t.reference_url }}<a href="{{ $t.reference_url }}" target="_blank" rel="noopener">{{ . | markdownify }}</a>{{ else }}{{ . | markdownify }}{{ end }}</p>{{ end }}
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ $n := .Params.show_latest_publications | default 0 }}
+{{ if $n }}
+{{ $pubs := partialCached "pub/all.html" . "pubs" }}
+{{ $members := partialCached "pub/members.html" . "members" }}
+<section class="section section-tint">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">Latest publications</h2>
+      <a class="arrow-link" href="{{ "/publications/" | relURL }}">All publications</a>
+    </div>
+    <ol class="pub-list">
+      {{ range first $n $pubs.list }}{{ partial "pub/entry.html" (dict "pub" . "members" $members) }}{{ end }}
+    </ol>
+  </div>
+</section>
+{{ end }}
+
+<section class="cta">
+  <div class="wrap cta-inner">
+    <div>
+      <h2>Interested in joining us?</h2>
+      <p>We welcome students, interns and postdocs from biology, computation and beyond.</p>
+    </div>
+    <a class="btn btn-light" href="{{ "/open-positions/" | relURL }}">Open positions</a>
+  </div>
+</section>
+{{ end }}

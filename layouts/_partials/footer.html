@@ -1,0 +1,22 @@
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-title">{{ site.Params.unit }}</p>
+      <p>{{ site.Params.institution }}<br>{{ site.Params.address }}</p>
+    </div>
+    <div>
+      <p class="footer-title">Contact</p>
+      <p>{{ partial "email.html" site.Params.email }}<br>
+        <a href="{{ "/contact/" | relURL }}">Send us a message</a></p>
+    </div>
+    <div>
+      <p class="footer-title">Elsewhere</p>
+      <p><a href="{{ site.Params.oistUrl }}" target="_blank" rel="noopener">Unit page at OIST</a><br>
+        <a href="https://orcid.org/{{ site.Params.orcid }}" target="_blank" rel="noopener">ORCID (N. M. Luscombe)</a></p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>© {{ now.Year }} {{ site.Title }}, OIST</span>
+    <a href="{{ "/admin/" | relURL }}" rel="nofollow">Edit site</a>
+  </div>
+</footer>

@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{ partial "page-head.html" . }}
+<section class="section">
+  <div class="wrap">
+    {{ range .Params.groups }}
+    <div class="resource-group">
+      <h2 class="section-title">{{ .title }}</h2>
+      <div class="resource-grid">
+        {{ range .items }}
+        <a class="card resource" href="{{ .url }}" target="_blank" rel="noopener">
+          <h3>{{ .name }}</h3>
+          {{ with .description }}<p>{{ . | markdownify }}</p>{{ end }}
+          <span class="resource-url">{{ replaceRE `^https?://(www\.)?` "" .url | strings.TrimSuffix "/" }}</span>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+    {{ with .Content }}<div class="prose narrow">{{ . }}</div>{{ end }}
+  </div>
+</section>
+{{ end }}

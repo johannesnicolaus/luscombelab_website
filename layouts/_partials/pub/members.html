@@ -1,0 +1,15 @@
+{{- /* Set of author keys for current and former lab members, used to bold their names. */ -}}
+{{- $s := newScratch -}}
+{{- $names := slice -}}
+{{- with site.GetPage "/people" -}}
+  {{- range .RegularPages -}}
+    {{- $names = $names | append .Title -}}
+    {{- range .Params.publication_names }}{{ $names = $names | append . }}{{ end -}}
+  {{- end -}}
+  {{- range .Params.alumni }}{{ with .name }}{{ $names = $names | append . }}{{ end }}{{ end -}}
+{{- end -}}
+{{- range $names -}}
+  {{- with partial "pub/author-key.html" . }}{{ $s.SetInMap "keys" . true }}{{ end -}}
+{{- end -}}
+{{- $keys := $s.Get "keys" | default dict -}}
+{{- return $keys -}}

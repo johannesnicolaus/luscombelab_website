@@ -1,0 +1,61 @@
+{{- /*
+Merge the automatic list (data/publications_auto.json) with the CMS settings
+(data/publications.yaml): hide entries, add manual ones (a manual entry with the
+same DOI replaces the automatic one) and resolve the "selected" list.
+Returns dict: list (sorted newest first), selected (in the configured order).
+*/ -}}
+{{- $cfg := index hugo.Data "publications" | default dict -}}
+{{- $auto := index hugo.Data "publications_auto" | default slice -}}
+{{- $s := newScratch -}}
+{{- $s.Set "hidden" dict -}}
+{{- $s.Set "manualKeys" dict -}}
+
+{{- range $cfg.hidden -}}
+  {{- $id := . -}}{{- if reflect.IsMap . }}{{ $id = .id }}{{ end -}}
+  {{- with $id }}{{ $s.SetInMap "hidden" (partial "pub/key.html" .) true }}{{ end -}}
+{{- end -}}
+
+{{- $manual := slice -}}
+{{- range $i, $m := $cfg.manual -}}
+  {{- $authors := slice -}}
+  {{- if reflect.IsSlice $m.authors -}}{{- $authors = $m.authors -}}
+  {{- else -}}{{- range split (string ($m.authors | default "")) "," }}{{ with strings.TrimSpace . }}{{ $authors = $authors | append . }}{{ end }}{{ end -}}
+  {{- end -}}
+  {{- $doi := "" -}}{{- with $m.doi }}{{ $doi = strings.TrimPrefix "doi:" (partial "pub/key.html" .) }}{{ end -}}
+  {{- $pmid := "" -}}{{- with $m.pmid }}{{ $pmid = string . }}{{ end -}}
+  {{- $id := printf "manual:%d" $i -}}
+  {{- if $doi }}{{ $id = printf "doi:%s" $doi }}{{ else if $pmid }}{{ $id = printf "pmid:%s" $pmid }}{{ end -}}
+  {{- $p := dict "id" $id "title" ($m.title | default "") "authors" $authors "venue" ($m.venue | default "")
+        "year" (int ($m.year | default 0)) "type" ($m.type | default "article") "doi" $doi "pmid" $pmid
+        "url" ($m.url | default "") "pdf" ($m.pdf | default "") "code" ($m.code | default "") "data" ($m.data | default "")
+        "note" ($m.note | default "") "volume" ($m.volume | default "") "pages" ($m.pages | default "") "manual" true -}}
+  {{- $s.SetInMap "manualKeys" $id true -}}
+  {{- with $pmid }}{{ $s.SetInMap "manualKeys" (printf "pmid:%s" .) true }}{{ end -}}
+  {{- $manual = $manual | append $p -}}
+{{- end -}}
+
+{{- $hidden := $s.Get "hidden" -}}
+{{- $mk := $s.Get "manualKeys" -}}
+{{- $list := slice -}}
+{{- range $auto -}}
+  {{- $pm := cond (isset . "pmid") (printf "pmid:%s" (string .pmid)) "" -}}
+  {{- $skip := or (index $hidden .id) (index $mk .id) -}}
+  {{- if $pm }}{{ $skip = or $skip (index $hidden $pm) (index $mk $pm) }}{{ end -}}
+  {{- if not $skip }}{{ $list = $list | append . }}{{ end -}}
+{{- end -}}
+{{- range $manual -}}
+  {{- if not (index $hidden .id) }}{{ $list = $list | append . }}{{ end -}}
+{{- end -}}
+{{- $list = sort $list "year" "desc" -}}
+
+{{- range $p := $list -}}
+  {{- $s.SetInMap "byId" $p.id $p -}}
+  {{- with $p.pmid }}{{ $s.SetInMap "byId" (printf "pmid:%s" (string .)) $p }}{{ end -}}
+{{- end -}}
+{{- $byId := $s.Get "byId" | default dict -}}
+{{- $selected := slice -}}
+{{- range $cfg.selected -}}
+  {{- $id := . -}}{{- if reflect.IsMap . }}{{ $id = .id }}{{ end -}}
+  {{- with $id }}{{ with index $byId (partial "pub/key.html" .) }}{{ $selected = $selected | append . }}{{ end }}{{ end -}}
+{{- end -}}
+{{- return dict "list" $list "selected" $selected -}}

@@ -1,0 +1,65 @@
+{{- /*
+Responsive image from the CMS media folder (assets/uploads).
+Params (dict):
+  src     "/uploads/…" path as stored by the CMS (required)
+  alt     alt text
+  widths  slice of widths (default 480 800 1200 1600)
+  sizes   sizes attribute (default 100vw)
+  ratio   optional "W:H" crop, e.g. "1:1" or "4:3"
+  class   CSS class
+  eager   true for above-the-fold images
+  link    true to wrap in a link to a large version (for the lightbox)
+  caption caption used by the lightbox
+  group   lightbox group name
+External URLs or missing files fall back to a plain <img>.
+*/ -}}
+{{- $src := .src | default "" -}}
+{{- $alt := .alt | default "" -}}
+{{- $widths := .widths | default (slice 480 800 1200 1600) -}}
+{{- $sizes := .sizes | default "100vw" -}}
+{{- $loading := cond (.eager | default false) "eager" "lazy" -}}
+{{- $r := "" -}}
+{{- if and $src (not (strings.HasPrefix $src "http")) -}}
+  {{- $r = resources.Get (strings.TrimPrefix "/" $src) -}}
+{{- end -}}
+{{- if and $r (in (slice "jpeg" "png" "webp" "gif" "tiff" "bmp") $r.MediaType.SubType) -}}
+  {{- $img := $r.Filter images.AutoOrient -}}
+  {{- $rx := 0 -}}{{- $ry := 0 -}}
+  {{- with .ratio -}}
+    {{- $p := split . ":" -}}{{- $rx = int (index $p 0) -}}{{- $ry = int (index $p 1) -}}
+  {{- end -}}
+  {{- $set := slice -}}
+  {{- $last := "" -}}
+  {{- range $widths -}}
+    {{- $w := . -}}
+    {{- if le $w $img.Width -}}
+      {{- $v := "" -}}
+      {{- if $rx -}}
+        {{- $h := div (mul $w $ry) $rx -}}
+        {{- if le $h $img.Height -}}{{- $v = $img.Fill (printf "%dx%d webp q80" $w $h) -}}{{- end -}}
+      {{- else -}}
+        {{- $v = $img.Resize (printf "%dx webp q80" $w) -}}
+      {{- end -}}
+      {{- with $v -}}{{- $set = $set | append (printf "%s %dw" .RelPermalink .Width) -}}{{- $last = . -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $last -}}
+    {{- /* source smaller than every requested width */ -}}
+    {{- if $rx -}}
+      {{- $s := math.Min $img.Width (div (mul $img.Height $rx) $ry) | int -}}
+      {{- $last = $img.Fill (printf "%dx%d webp q80" $s (div (mul $s $ry) $rx)) -}}
+    {{- else -}}
+      {{- $last = $img.Resize (printf "%dx webp q80" $img.Width) -}}
+    {{- end -}}
+    {{- $set = slice (printf "%s %dw" $last.RelPermalink $last.Width) -}}
+  {{- end -}}
+  {{- $tag := printf `<img src="%s" srcset="%s" sizes="%s" width="%d" height="%d" alt="%s" loading="%s" decoding="async"%s>` $last.RelPermalink (delimit $set ", ") $sizes $last.Width $last.Height ($alt | htmlEscape) $loading (cond (isset . "class") (printf ` class="%s"` .class) "") -}}
+  {{- if .link -}}
+    {{- $big := $img.Fit "2000x2000 webp q82" -}}
+    <a class="lightbox-link" href="{{ $big.RelPermalink }}" data-group="{{ .group | default "gallery" }}" data-caption="{{ .caption | default $alt }}">{{ $tag | safeHTML }}</a>
+  {{- else -}}
+    {{- $tag | safeHTML -}}
+  {{- end -}}
+{{- else if $src -}}
+  <img src="{{ $src }}" alt="{{ $alt }}" loading="{{ $loading }}"{{ with .class }} class="{{ . }}"{{ end }}>
+{{- end -}}
