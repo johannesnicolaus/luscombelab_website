@@ -3,8 +3,8 @@ title: "Nicolas Dierckxsens"
 role: "Research Scientist"
 photo: /uploads/people/nicolas-dierckxsens.jpg
 group: "Scientists"
-weight: 40
-former: false
+weight: 5
+former: true
 links:
   scholar: https://scholar.google.be/citations?user=9kZAUocAAAAJ
 ---
