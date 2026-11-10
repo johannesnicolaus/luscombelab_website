@@ -6,6 +6,7 @@ Params (dict):
   widths  slice of widths (default 480 800 1200 1600)
   sizes   sizes attribute (default 100vw)
   ratio   optional "W:H" crop, e.g. "1:1" or "4:3"
+  anchor  optional crop anchor (Center, Top, Smart, …)
   class   CSS class
   eager   true for above-the-fold images
   link    true to wrap in a link to a large version (for the lightbox)
@@ -18,6 +19,7 @@ External URLs or missing files fall back to a plain <img>.
 {{- $widths := .widths | default (slice 480 800 1200 1600) -}}
 {{- $sizes := .sizes | default "100vw" -}}
 {{- $loading := cond (.eager | default false) "eager" "lazy" -}}
+{{- $anchor := cond (isset . "anchor") (printf " %s" .anchor) "" -}}
 {{- $r := "" -}}
 {{- if and $src (not (strings.HasPrefix $src "http")) -}}
   {{- $r = resources.Get (strings.TrimPrefix "/" $src) -}}
@@ -36,7 +38,7 @@ External URLs or missing files fall back to a plain <img>.
       {{- $v := "" -}}
       {{- if $rx -}}
         {{- $h := div (mul $w $ry) $rx -}}
-        {{- if le $h $img.Height -}}{{- $v = $img.Fill (printf "%dx%d webp q80" $w $h) -}}{{- end -}}
+        {{- if le $h $img.Height -}}{{- $v = $img.Fill (printf "%dx%d webp q80%s" $w $h $anchor) -}}{{- end -}}
       {{- else -}}
         {{- $v = $img.Resize (printf "%dx webp q80" $w) -}}
       {{- end -}}
@@ -47,7 +49,7 @@ External URLs or missing files fall back to a plain <img>.
     {{- /* source smaller than every requested width */ -}}
     {{- if $rx -}}
       {{- $s := math.Min $img.Width (div (mul $img.Height $rx) $ry) | int -}}
-      {{- $last = $img.Fill (printf "%dx%d webp q80" $s (div (mul $s $ry) $rx)) -}}
+      {{- $last = $img.Fill (printf "%dx%d webp q80%s" $s (div (mul $s $ry) $rx) $anchor) -}}
     {{- else -}}
       {{- $last = $img.Resize (printf "%dx webp q80" $img.Width) -}}
     {{- end -}}

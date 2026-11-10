@@ -44,6 +44,12 @@ collections:
         default: Scientists
         options: [Professor, Scientists, Technicians, Students, Interns, Visiting researchers, Administration]
       - { name: photo, label: Photo, widget: image, required: false, hint: "Square-ish portrait works best; it is cropped to a square automatically." }
+      - name: photo_anchor
+        label: Photo crop position
+        widget: select
+        required: false
+        hint: "Which part of the photo to keep when cropping to a square. Leave empty for automatic."
+        options: [Center, Top, Bottom, Left, Right, Smart]
       - { name: weight, label: Order, widget: number, value_type: int, default: 100, hint: "Lower numbers are shown first." }
       - { name: former, label: Former member, widget: boolean, default: false }
       - { name: former_note, label: Former member note, widget: string, required: false, hint: "Only for former members, e.g. 'now at EMBL-EBI'." }

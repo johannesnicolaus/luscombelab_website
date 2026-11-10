@@ -1,9 +1,11 @@
 {{- $name := .Title -}}
+{{- $imgOpts := dict "alt" .Title "ratio" "1:1" "widths" (slice 320 480 640) "sizes" "(min-width: 720px) 220px, 40vw" -}}
+{{- with .Params.photo_anchor }}{{ $imgOpts = merge $imgOpts (dict "anchor" .) }}{{ end -}}
 {{- $hasBio := strings.TrimSpace (string .RawContent) -}}
 <article class="person card{{ if not $hasBio }} person-compact{{ end }}" id="{{ .File.ContentBaseName }}">
   <div class="person-photo">
     {{- with .Params.photo }}
-      {{- partial "img.html" (dict "src" . "alt" $name "ratio" "1:1" "widths" (slice 320 480 640) "sizes" "(min-width: 720px) 220px, 40vw") }}
+      {{- partial "img.html" (merge $imgOpts (dict "src" .)) }}
     {{- else }}
       <span class="person-initials" aria-hidden="true">{{ range first 2 (split (replaceRE `^[A-Z]\.\s+` "" $name) " ") }}{{ substr . 0 1 }}{{ end }}</span>
     {{- end }}
