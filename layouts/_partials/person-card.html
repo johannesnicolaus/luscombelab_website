@@ -18,7 +18,7 @@
       {{ with .scholar }}<a href="{{ . }}" target="_blank" rel="noopener">Google Scholar</a>{{ end }}
       {{ with .orcid }}<a href="{{ . }}" target="_blank" rel="noopener">ORCID</a>{{ end }}
       {{ with .github }}<a href="{{ . }}" target="_blank" rel="noopener">GitHub</a>{{ end }}
-      {{ with .website }}<a href="{{ . }}" target="_blank" rel="noopener">Website</a>{{ end }}
+      {{ with .website }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "website" }}</a>{{ end }}
     </p>
     {{ end }}
     {{ with .Content }}<div class="person-bio">{{ . }}</div>{{ end }}

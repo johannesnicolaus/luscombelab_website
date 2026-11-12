@@ -24,7 +24,7 @@
       {{- $labRest := slice -}}
       {{- range $rest }}{{ if index $members (partial "pub/author-key.html" .) }}{{ $labRest = $labRest | append . }}{{ end }}{{ end -}}
       {{- with $labRest }}, …, {{ range $i, $a := . }}{{ if $i }}, {{ end }}<strong>{{ $a }}</strong>{{ end }}{{ end -}}
-      <span class="muted"> … {{ len $rest }} more authors</span>
+      <span class="muted"> {{ printf (i18n "more_authors") (len $rest) }}</span>
     {{- end -}}
   </p>
   {{- end }}
@@ -32,17 +32,17 @@
     {{- with $p.venue }}<em>{{ . }}</em>{{ end -}}
     {{- with $p.volume }} {{ . }}{{ end }}{{ with $p.issue }}({{ . }}){{ end }}{{ with $p.pages }}:{{ . }}{{ end -}}
     {{- with $p.year }}{{ if or $p.venue $p.volume }}, {{ end }}{{ . }}{{ end -}}
-    {{- if eq $p.type "preprint" }} <span class="badge">Preprint</span>{{ end -}}
-    {{- if eq $p.type "review" }} <span class="badge badge-soft">Review</span>{{ end -}}
-    {{- if in (slice "book" "book-chapter") $p.type }} <span class="badge badge-soft">Book</span>{{ end -}}
+    {{- if eq $p.type "preprint" }} <span class="badge">{{ i18n "badge_preprint" }}</span>{{ end -}}
+    {{- if eq $p.type "review" }} <span class="badge badge-soft">{{ i18n "badge_review" }}</span>{{ end -}}
+    {{- if in (slice "book" "book-chapter") $p.type }} <span class="badge badge-soft">{{ i18n "badge_book" }}</span>{{ end -}}
     {{- with $p.note }} <span class="muted">· {{ . | markdownify }}</span>{{ end -}}
   </p>
   <p class="pub-links">
     {{- with $p.doi }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">DOI</a>{{ end -}}
     {{- with $p.pmid }}<a href="https://pubmed.ncbi.nlm.nih.gov/{{ . }}/" target="_blank" rel="noopener">PubMed</a>{{ end -}}
-    {{- with $p.pdf | default $p.oa_url }}{{ if ne (lower .) (lower $href) }}<a href="{{ . }}" target="_blank" rel="noopener">Full text</a>{{ end }}{{ end -}}
-    {{- with $p.preprint_doi }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">Preprint</a>{{ end -}}
-    {{- with $p.code }}<a href="{{ . }}" target="_blank" rel="noopener">Code</a>{{ end -}}
-    {{- with $p.data }}<a href="{{ . }}" target="_blank" rel="noopener">Data</a>{{ end -}}
+    {{- with $p.pdf | default $p.oa_url }}{{ if ne (lower .) (lower $href) }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "full_text" }}</a>{{ end }}{{ end -}}
+    {{- with $p.preprint_doi }}<a href="https://doi.org/{{ . }}" target="_blank" rel="noopener">{{ i18n "preprint" }}</a>{{ end -}}
+    {{- with $p.code }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "code" }}</a>{{ end -}}
+    {{- with $p.data }}<a href="{{ . }}" target="_blank" rel="noopener">{{ i18n "data" }}</a>{{ end -}}
   </p>
 </li>

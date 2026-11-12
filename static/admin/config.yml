@@ -21,9 +21,21 @@ display_url: https://luscombelab.netlify.app
 media_folder: assets/uploads
 public_folder: /uploads
 
+# Languages. Each entry is saved as name.md (English) and name.ja.md (Japanese).
+# Fields marked i18n: true are translated; i18n: duplicate fields (photos, links, order…)
+# are copied from English. Untick Japanese for an entry to leave it English-only: the site
+# then shows the English version under /ja/ with a "not translated yet" note.
+i18n:
+  structure: multiple_files
+  locales: [en, ja]
+  default_locale: en
+  omit_default_locale_from_filename: true
+  save_all_locales: false
+
 collections:
   # ---------------------------------------------------------------- People
   - name: people
+    i18n: true
     label: People
     label_singular: Person
     description: One entry per lab member. Set "Former member" to move someone to the alumni list.
@@ -36,43 +48,48 @@ collections:
     media_folder: /assets/uploads/people
     public_folder: /uploads/people
     fields:
-      - { name: title, label: Name, widget: string }
-      - { name: role, label: Role, widget: string, hint: "e.g. Research Scientist, PhD Student, Research Intern" }
+      - { name: title, label: Name, widget: string, i18n: true }
+      - { name: role, label: Role, widget: string, hint: "e.g. Research Scientist, PhD Student, Research Intern", i18n: true }
       - name: group
+        i18n: duplicate
         label: Group on the People page
         widget: select
         default: Scientists
         options: [Professor, Scientists, Technicians, Students, Interns, Visiting researchers, Administration]
-      - { name: photo, label: Photo, widget: image, required: false, hint: "Square-ish portrait works best; it is cropped to a square automatically." }
+      - { name: photo, label: Photo, widget: image, required: false, hint: "Square-ish portrait works best; it is cropped to a square automatically.", i18n: duplicate }
       - name: photo_anchor
+        i18n: duplicate
         label: Photo crop position
         widget: select
         required: false
         hint: "Which part of the photo to keep when cropping to a square. Leave empty for automatic."
         options: [Center, Top, Bottom, Left, Right, Smart]
-      - { name: weight, label: Order, widget: number, value_type: int, default: 100, hint: "Lower numbers are shown first." }
-      - { name: former, label: Former member, widget: boolean, default: false }
-      - { name: former_note, label: Former member note, widget: string, required: false, hint: "Only for former members, e.g. 'now at EMBL-EBI'." }
+      - { name: weight, label: Order, widget: number, value_type: int, default: 100, hint: "Lower numbers are shown first.", i18n: duplicate }
+      - { name: former, label: Former member, widget: boolean, default: false, i18n: duplicate }
+      - { name: former_note, label: Former member note, widget: string, required: false, hint: "Only for former members, e.g. 'now at EMBL-EBI'.", i18n: true }
       - name: links
+        i18n: duplicate
         label: Links
         widget: object
         required: false
         collapsed: true
         fields:
-          - { name: scholar, label: Google Scholar URL, widget: string, required: false }
-          - { name: orcid, label: ORCID URL, widget: string, required: false }
-          - { name: github, label: GitHub URL, widget: string, required: false }
-          - { name: website, label: Personal website, widget: string, required: false }
+          - { name: scholar, label: Google Scholar URL, widget: string, required: false, i18n: duplicate }
+          - { name: orcid, label: ORCID URL, widget: string, required: false, i18n: duplicate }
+          - { name: github, label: GitHub URL, widget: string, required: false, i18n: duplicate }
+          - { name: website, label: Personal website, widget: string, required: false, i18n: duplicate }
       - name: publication_names
+        i18n: duplicate
         label: Name variants in publications
         widget: list
         required: false
         hint: "Optional. Extra spellings used to bold this person in the publication list, e.g. 'G Sanchez-Serna'. Surname + first initial is matched automatically."
-        field: { name: name, label: Name, widget: string }
-      - { name: body, label: Bio, widget: markdown }
+        field: { name: name, label: Name, widget: string, i18n: duplicate }
+      - { name: body, label: Bio, widget: markdown, i18n: true }
 
   # ---------------------------------------------------------------- Lab photos
   - name: albums
+    i18n: true
     label: Lab Photos
     label_singular: Album
     description: Each album is shown as a section on the Lab Photos page.
@@ -84,24 +101,27 @@ collections:
     media_folder: /assets/uploads/photos
     public_folder: /uploads/photos
     fields:
-      - { name: title, label: Album title, widget: string }
-      - { name: weight, label: Order, widget: number, value_type: int, default: 100, hint: "Lower numbers are shown first. Use small numbers for new albums to put them on top." }
-      - { name: date, label: Date, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false }
-      - { name: description, label: Description, widget: text, required: false }
+      - { name: title, label: Album title, widget: string, i18n: true }
+      - { name: weight, label: Order, widget: number, value_type: int, default: 100, hint: "Lower numbers are shown first. Use small numbers for new albums to put them on top.", i18n: duplicate }
+      - { name: date, label: Date, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, i18n: duplicate }
+      - { name: description, label: Description, widget: text, required: false, i18n: true }
       - name: photos
+        i18n: true
         label: Photos
         widget: list
         add_to_top: false
         fields:
-          - { name: image, label: Image, widget: image }
-          - { name: caption, label: Description, widget: string, required: false, hint: "Not shown under the photo; used for screen readers and in the enlarged view." }
+          - { name: image, label: Image, widget: image, i18n: duplicate }
+          - { name: caption, label: Description, widget: string, required: false, hint: "Not shown under the photo; used for screen readers and in the enlarged view.", i18n: true }
 
   # ---------------------------------------------------------------- Publications
   - name: publications
+    i18n: true
     label: Publications
     description: The full list updates automatically every week from OpenAlex and PubMed. Use this to pick featured papers, hide wrong matches, or add missing ones.
     files:
       - name: settings
+        i18n: false
         label: Selected, hidden & manual publications
         file: data/publications.yaml
         fields:
@@ -154,10 +174,11 @@ collections:
         label: Publications page text
         file: content/publications/_index.md
         fields:
-          - { name: title, label: Title, widget: string }
-          - { name: intro, label: Introduction, widget: text, required: false }
-          - { name: covers_title, label: Covers heading, widget: string, required: false, default: Journal covers }
+          - { name: title, label: Title, widget: string, i18n: true }
+          - { name: intro, label: Introduction, widget: text, required: false, i18n: true }
+          - { name: covers_title, label: Covers heading, widget: string, required: false, default: Journal covers, i18n: true }
           - name: covers
+            i18n: duplicate
             label: Journal covers
             widget: list
             required: false
@@ -166,15 +187,16 @@ collections:
             media_folder: /assets/uploads/covers
             public_folder: /uploads/covers
             fields:
-              - { name: image, label: Cover image, widget: image }
-              - { name: journal, label: Journal, widget: string }
-              - { name: issue, label: Issue, widget: string, required: false, hint: "e.g. Vol. 16, Issue 9" }
-              - { name: year, label: Year, widget: number, value_type: int }
-              - { name: doi, label: DOI of the featured article, widget: string, required: false }
-              - { name: url, label: Link (if no DOI), widget: string, required: false }
+              - { name: image, label: Cover image, widget: image, i18n: duplicate }
+              - { name: journal, label: Journal, widget: string, i18n: duplicate }
+              - { name: issue, label: Issue, widget: string, required: false, hint: "e.g. Vol. 16, Issue 9", i18n: duplicate }
+              - { name: year, label: Year, widget: number, value_type: int, i18n: duplicate }
+              - { name: doi, label: DOI of the featured article, widget: string, required: false, i18n: duplicate }
+              - { name: url, label: Link (if no DOI), widget: string, required: false, i18n: duplicate }
 
   # ---------------------------------------------------------------- Pages
   - name: pages
+    i18n: true
     label: Pages
     description: Text and settings for each page of the site.
     files:
@@ -184,37 +206,40 @@ collections:
         media_folder: /assets/uploads/home
         public_folder: /uploads/home
         fields:
-          - { name: title, label: Title, widget: string }
-          - { name: tagline, label: Tagline, widget: text }
-          - { name: hero_image, label: Main image, widget: image }
-          - { name: hero_alt, label: Main image description (for screen readers), widget: string, required: false }
-          - { name: body, label: Introduction, widget: markdown }
+          - { name: title, label: Title, widget: string, i18n: true }
+          - { name: tagline, label: Tagline, widget: text, i18n: true }
+          - { name: hero_image, label: Main image, widget: image, i18n: duplicate }
+          - { name: hero_alt, label: Main image description (for screen readers), widget: string, required: false, i18n: true }
+          - { name: body, label: Introduction, widget: markdown, i18n: true }
           - name: questions
+            i18n: true
             label: Key questions
             widget: list
             required: false
-            field: { name: question, label: Question, widget: text }
-          - { name: outro, label: Text after the questions, widget: text, required: false }
+            field: { name: question, label: Question, widget: text, i18n: true }
+          - { name: outro, label: Text after the questions, widget: text, required: false, i18n: true }
           - name: research_topics
+            i18n: true
             label: Research topics
             widget: list
             summary: "{{title}}"
             fields:
-              - { name: title, label: Title, widget: string }
-              - { name: text, label: Description, widget: text }
-              - { name: reference, label: Key reference (optional), widget: string, required: false }
-              - { name: reference_url, label: Reference link, widget: string, required: false }
-          - { name: videos_title, label: Videos heading, widget: string, required: false, default: Videos }
+              - { name: title, label: Title, widget: string, i18n: true }
+              - { name: text, label: Description, widget: text, i18n: true }
+              - { name: reference, label: Key reference (optional), widget: string, required: false, i18n: true }
+              - { name: reference_url, label: Reference link, widget: string, required: false, i18n: duplicate }
+          - { name: videos_title, label: Videos heading, widget: string, required: false, default: Videos, i18n: true }
           - name: videos
+            i18n: true
             label: Videos on the home page
             widget: list
             required: false
             summary: "{{title}}"
             fields:
-              - { name: title, label: Title, widget: string }
-              - { name: youtube, label: YouTube video ID, widget: string, hint: "The part after watch?v= in the YouTube link" }
-              - { name: start, label: Start at (seconds), widget: number, value_type: int, required: false }
-          - { name: show_latest_publications, label: Number of latest publications to show, widget: number, value_type: int, default: 4 }
+              - { name: title, label: Title, widget: string, i18n: true }
+              - { name: youtube, label: YouTube video ID, widget: string, hint: "The part after watch?v= in the YouTube link", i18n: duplicate }
+              - { name: start, label: Start at (seconds), widget: number, value_type: int, required: false, i18n: duplicate }
+          - { name: show_latest_publications, label: Number of latest publications to show, widget: number, value_type: int, default: 4, i18n: duplicate }
 
       - name: people_page
         label: People page (group photo, collaborators, alumni)
@@ -222,35 +247,37 @@ collections:
         media_folder: /assets/uploads/people
         public_folder: /uploads/people
         fields:
-          - { name: title, label: Title, widget: string }
-          - { name: group_photo, label: Group photo, widget: image, required: false }
-          - { name: group_photo_alt, label: Group photo description (for screen readers), widget: string, required: false }
+          - { name: title, label: Title, widget: string, i18n: true }
+          - { name: group_photo, label: Group photo, widget: image, required: false, i18n: duplicate }
+          - { name: group_photo_alt, label: Group photo description (for screen readers), widget: string, required: false, i18n: true }
           - name: collaborators
+            i18n: true
             label: Collaborators
             widget: list
             required: false
             summary: "{{name}} — {{affiliation}}"
             fields:
-              - { name: name, label: Name, widget: string }
-              - { name: affiliation, label: Affiliation, widget: string, required: false }
-              - { name: url, label: Website, widget: string, required: false }
+              - { name: name, label: Name, widget: string, i18n: duplicate }
+              - { name: affiliation, label: Affiliation, widget: string, required: false, i18n: true }
+              - { name: url, label: Website, widget: string, required: false, i18n: duplicate }
           - name: alumni
+            i18n: true
             label: Former members (list)
             widget: list
             required: false
             summary: "{{name}}, {{role}}"
             hint: "Simple list of former members. Alternatively, open the person's entry under People and tick 'Former member'."
             fields:
-              - { name: name, label: Name, widget: string }
-              - { name: role, label: Role, widget: string, required: false }
-              - { name: note, label: Note, widget: string, required: false, hint: "e.g. 'now at Wellcome Sanger Institute, UK'" }
+              - { name: name, label: Name, widget: string, i18n: duplicate }
+              - { name: role, label: Role, widget: string, required: false, i18n: true }
+              - { name: note, label: Note, widget: string, required: false, hint: "e.g. 'now at Wellcome Sanger Institute, UK'", i18n: true }
 
       - name: lab_photos_page
         label: Lab Photos page text
         file: content/lab-photos/_index.md
         fields:
-          - { name: title, label: Title, widget: string }
-          - { name: intro, label: Introduction, widget: text, required: false }
+          - { name: title, label: Title, widget: string, i18n: true }
+          - { name: intro, label: Introduction, widget: text, required: false, i18n: true }
 
       - name: plankton
         label: Plankton Gallery
@@ -258,54 +285,58 @@ collections:
         media_folder: /assets/uploads/plankton
         public_folder: /uploads/plankton
         fields:
-          - { name: title, label: Title, widget: string }
-          - { name: intro, label: Introduction, widget: text, required: false }
-          - { name: featured_title, label: Featured videos heading, widget: string, required: false }
+          - { name: title, label: Title, widget: string, i18n: true }
+          - { name: intro, label: Introduction, widget: text, required: false, i18n: true }
+          - { name: featured_title, label: Featured videos heading, widget: string, required: false, i18n: true }
           - name: featured
+            i18n: true
             label: Featured YouTube videos
             widget: list
             required: false
             summary: "{{title}}"
             fields:
-              - { name: title, label: Title, widget: string }
-              - { name: youtube, label: YouTube video ID, widget: string, hint: "The part after watch?v= in the YouTube link, e.g. idUusw1INV0" }
-              - { name: start, label: Start at (seconds), widget: number, value_type: int, required: false }
-          - { name: items_title, label: Gallery heading, widget: string, required: false, default: "Videos & images" }
+              - { name: title, label: Title, widget: string, i18n: true }
+              - { name: youtube, label: YouTube video ID, widget: string, hint: "The part after watch?v= in the YouTube link, e.g. idUusw1INV0", i18n: duplicate }
+              - { name: start, label: Start at (seconds), widget: number, value_type: int, required: false, i18n: duplicate }
+          - { name: items_title, label: Gallery heading, widget: string, required: false, default: "Videos & images", i18n: true }
           - name: items
+            i18n: true
             label: Gallery items
             widget: list
             required: false
             summary: "{{title}}"
             hint: "Each item is a YouTube video, an uploaded video file (MP4) or an image."
             fields:
-              - { name: title, label: Title, widget: string }
-              - { name: caption, label: Caption, widget: string, required: false }
-              - { name: youtube, label: YouTube video ID, widget: string, required: false }
-              - { name: start, label: Start at (seconds), widget: number, value_type: int, required: false }
-              - { name: video, label: Video file (MP4), widget: file, required: false, hint: "Keep clips short (under ~20 MB)." }
-              - { name: poster, label: Video thumbnail, widget: image, required: false }
-              - { name: image, label: Image (instead of a video), widget: image, required: false }
+              - { name: title, label: Title, widget: string, i18n: true }
+              - { name: caption, label: Caption, widget: string, required: false, i18n: true }
+              - { name: youtube, label: YouTube video ID, widget: string, required: false, i18n: duplicate }
+              - { name: start, label: Start at (seconds), widget: number, value_type: int, required: false, i18n: duplicate }
+              - { name: video, label: Video file (MP4), widget: file, required: false, hint: "Keep clips short (under ~20 MB).", i18n: duplicate }
+              - { name: poster, label: Video thumbnail, widget: image, required: false, i18n: duplicate }
+              - { name: image, label: Image (instead of a video), widget: image, required: false, i18n: duplicate }
 
       - name: resources
         label: Resources
         file: content/resources/_index.md
         fields:
-          - { name: title, label: Title, widget: string }
-          - { name: intro, label: Introduction, widget: text, required: false }
+          - { name: title, label: Title, widget: string, i18n: true }
+          - { name: intro, label: Introduction, widget: text, required: false, i18n: true }
           - name: groups
+            i18n: true
             label: Groups
             widget: list
             summary: "{{title}}"
             fields:
-              - { name: title, label: Group title, widget: string }
+              - { name: title, label: Group title, widget: string, i18n: true }
               - name: items
+                i18n: true
                 label: Resources
                 widget: list
                 summary: "{{name}}"
                 fields:
-                  - { name: name, label: Name, widget: string }
-                  - { name: url, label: Link, widget: string }
-                  - { name: description, label: Description, widget: text, required: false }
+                  - { name: name, label: Name, widget: string, i18n: true }
+                  - { name: url, label: Link, widget: string, i18n: duplicate }
+                  - { name: description, label: Description, widget: text, required: false, i18n: true }
 
       - name: open_positions
         label: Open Positions
@@ -313,33 +344,36 @@ collections:
         media_folder: /assets/uploads/positions
         public_folder: /uploads/positions
         fields:
-          - { name: title, label: Title, widget: string }
-          - { name: image, label: Image, widget: image, required: false }
-          - { name: image_alt, label: Image description (for screen readers), widget: string, required: false }
-          - { name: body, label: Main text, widget: markdown }
+          - { name: title, label: Title, widget: string, i18n: true }
+          - { name: image, label: Image, widget: image, required: false, i18n: duplicate }
+          - { name: image_alt, label: Image description (for screen readers), widget: string, required: false, i18n: true }
+          - { name: body, label: Main text, widget: markdown, i18n: true }
           - name: positions
+            i18n: true
             label: Current openings
             widget: list
             required: false
             summary: "{{title}}{{open | ternary('', ' (closed)')}}"
             hint: "Specific positions. Untick 'Open' to hide one without deleting it."
             fields:
-              - { name: title, label: Position title, widget: string }
-              - { name: type, label: Type, widget: select, options: [Postdoc, PhD, Internship, Technician, Staff, Other] }
-              - { name: description, label: Description, widget: text, required: false }
-              - { name: deadline, label: Deadline, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false }
-              - { name: link, label: Link to advert, widget: string, required: false }
-              - { name: open, label: Open, widget: boolean, default: true }
+              - { name: title, label: Position title, widget: string, i18n: true }
+              - { name: type, label: Type, widget: select, options: [Postdoc, PhD, Internship, Technician, Staff, Other], i18n: duplicate }
+              - { name: description, label: Description, widget: text, required: false, i18n: true }
+              - { name: deadline, label: Deadline, widget: datetime, required: false, date_format: "YYYY-MM-DD", time_format: false, i18n: duplicate }
+              - { name: link, label: Link to advert, widget: string, required: false, i18n: duplicate }
+              - { name: open, label: Open, widget: boolean, default: true, i18n: duplicate }
           - name: apply_links
+            i18n: true
             label: How to apply (cards)
             widget: list
             required: false
             summary: "{{label}}"
             fields:
-              - { name: label, label: Title, widget: string }
-              - { name: url, label: Link, widget: string }
-              - { name: description, label: Description, widget: text, required: false }
+              - { name: label, label: Title, widget: string, i18n: true }
+              - { name: url, label: Link, widget: string, i18n: duplicate }
+              - { name: description, label: Description, widget: text, required: false, i18n: true }
               - name: subject
+                i18n: duplicate
                 label: Contact form subject
                 widget: select
                 required: false
@@ -349,6 +383,6 @@ collections:
         label: Contact
         file: content/contact/_index.md
         fields:
-          - { name: title, label: Title, widget: string }
-          - { name: intro, label: Introduction, widget: text, required: false }
-          - { name: map_url, label: Map link, widget: string, required: false }
+          - { name: title, label: Title, widget: string, i18n: true }
+          - { name: intro, label: Introduction, widget: text, required: false, i18n: true }
+          - { name: map_url, label: Map link, widget: string, required: false, i18n: duplicate }

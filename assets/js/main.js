@@ -25,7 +25,8 @@ if (topic) {
   if (want && [...topic.options].some((o) => o.value === want)) topic.value = want;
   const form = topic.form;
   form.addEventListener("submit", () => {
-    const label = topic.options[topic.selectedIndex].text;
+    const opt = topic.options[topic.selectedIndex];
+    const label = opt.dataset.en || opt.text; // English label so the lab inbox gets consistent subjects
     const name = (form.elements.name.value || "").trim();
     form.elements.subject.value = `Luscombe Lab website: ${label}${name ? ` from ${name}` : ""}`;
   });

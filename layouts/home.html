@@ -6,8 +6,8 @@
       <h1>{{ .Title | markdownify }}</h1>
       {{ with .Params.tagline }}<p class="hero-tagline">{{ . | markdownify }}</p>{{ end }}
       <p class="hero-actions">
-        <a class="btn btn-light" href="#research">Our research</a>
-        <a class="btn btn-ghost" href="{{ "/open-positions/" | relURL }}">Join us</a>
+        <a class="btn btn-light" href="#research">{{ i18n "our_research" }}</a>
+        <a class="btn btn-ghost" href="{{ "/open-positions/" | relLangURL }}">{{ i18n "join_us" }}</a>
       </p>
     </div>
     {{ with .Params.hero_image }}
@@ -31,7 +31,7 @@
   {{ end }}
   {{ with .Params.outro }}
   <div class="wrap narrow prose"><p>{{ . | markdownify }}</p>
-    <p><a class="arrow-link" href="{{ "/plankton-gallery/" | relURL }}">Meet <em>Oikopleura dioica</em> in the plankton gallery</a></p>
+    <p><a class="arrow-link" href="{{ "/plankton-gallery/" | relLangURL }}">{{ i18n "plankton_gallery_link" | safeHTML }}</a></p>
   </div>
   {{ end }}
 </section>
@@ -40,8 +40,8 @@
 <section class="section section-tint">
   <div class="wrap">
     <div class="section-head">
-      <h2 class="section-title">{{ $.Params.videos_title | default "Videos" }}</h2>
-      <a class="arrow-link" href="{{ "/plankton-gallery/" | relURL }}">Plankton gallery</a>
+      <h2 class="section-title">{{ $.Params.videos_title | default (i18n "videos") }}</h2>
+      <a class="arrow-link" href="{{ "/plankton-gallery/" | relLangURL }}">{{ i18n "plankton_gallery" }}</a>
     </div>
     <div class="video-grid video-grid-2">
       {{ range . }}
@@ -58,7 +58,7 @@
 {{ with .Params.research_topics }}
 <section class="section" id="research">
   <div class="wrap">
-    <h2 class="section-title">Research topics</h2>
+    <h2 class="section-title">{{ i18n "research_topics" }}</h2>
     <div class="topic-grid">
       {{ range $i, $t := . }}
       <article class="card topic">
@@ -80,8 +80,8 @@
 <section class="section section-tint">
   <div class="wrap">
     <div class="section-head">
-      <h2 class="section-title">Latest publications</h2>
-      <a class="arrow-link" href="{{ "/publications/" | relURL }}">All publications</a>
+      <h2 class="section-title">{{ i18n "latest_publications" }}</h2>
+      <a class="arrow-link" href="{{ "/publications/" | relLangURL }}">{{ i18n "all_publications_link" }}</a>
     </div>
     <ol class="pub-list">
       {{ range first $n $pubs.list }}{{ partial "pub/entry.html" (dict "pub" . "members" $members) }}{{ end }}
@@ -93,10 +93,10 @@
 <section class="cta">
   <div class="wrap cta-inner">
     <div>
-      <h2>Interested in joining us?</h2>
-      <p>We welcome students, interns and postdocs from biology, computation and beyond.</p>
+      <h2>{{ i18n "cta_title" }}</h2>
+      <p>{{ i18n "cta_text" }}</p>
     </div>
-    <a class="btn btn-light" href="{{ "/open-positions/" | relURL }}">Open positions</a>
+    <a class="btn btn-light" href="{{ "/open-positions/" | relLangURL }}">{{ i18n "open_positions" }}</a>
   </div>
 </section>
 {{ end }}

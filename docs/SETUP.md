@@ -107,3 +107,14 @@ python3 scripts/fetch_publications.py
 | Feature or hide a paper | **Publications → Selected, hidden & manual publications** |
 
 Uploaded photos can be straight from a phone: the site resizes them and converts them to WebP automatically.
+
+## 9. Japanese version (日本語)
+
+The site is bilingual: English at `/`, Japanese at `/ja/`. A language switch sits at the end of the menu.
+
+- **Page text** lives next to the English file with a `.ja` suffix, e.g. `content/contact/_index.md` → `content/contact/_index.ja.md`, `content/people/kanchi-nanjo.md` → `kanchi-nanjo.ja.md`.
+- **Pages without a `.ja.md` file still exist under `/ja/`.** They show the English text with a short note saying the page is not translated yet, and tell search engines that the English page is the original. So you can translate one page at a time.
+- **Fixed interface text** (menu names, button labels, headings such as "Former members", form labels) is in `i18n/en.yaml` and `i18n/ja.yaml`. Menu names are in `hugo.toml` under `[languages.ja.menus]`; the Japanese unit name, address and site title are under `[languages.ja]`.
+- **In the CMS**, each entry shows English and Japanese side by side. Fields such as photos, links, order and "Former member" are copied from English automatically, so only text needs translating. To keep an entry English-only, switch Japanese off for that entry; the English version is then shown under `/ja/`.
+- A `.ja.md` file is a complete page: when it exists, the English file is not used for `/ja/` at all. If you edit an English file outside the CMS (e.g. change a photo), make the same change in its `.ja.md` file.
+- Publication lists, DOIs and author names are not translated. Member names in Japanese (katakana) are fine: bold names in the publication list still use the English name.

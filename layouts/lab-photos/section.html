@@ -7,7 +7,7 @@
     <section class="album" id="{{ .File.ContentBaseName }}">
       <div class="album-head">
         <h2>{{ .Title }}</h2>
-        {{ with .Date }}{{ if not .IsZero }}<time class="muted" datetime="{{ .Format "2006-01-02" }}">{{ .Format "January 2006" }}</time>{{ end }}{{ end }}
+        {{ with .Date }}{{ if not .IsZero }}<time class="muted" datetime="{{ .Format "2006-01-02" }}">{{ .Format (i18n "date_month") }}</time>{{ end }}{{ end }}
       </div>
       {{ with .Params.description }}<p class="album-desc">{{ . | markdownify }}</p>{{ end }}
       <div class="photo-grid">

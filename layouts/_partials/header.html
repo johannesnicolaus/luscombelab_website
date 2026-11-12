@@ -1,19 +1,25 @@
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="{{ "/" | relURL }}">
+    <a class="brand" href="{{ "/" | relLangURL }}">
       <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="currentColor" opacity=".12"/><path d="M9 24c4-9 13-12 21-8M12 28c5-5 11-6 17-4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><circle cx="29" cy="15" r="3.2" fill="currentColor"/></svg>
       <span class="brand-text"><strong>{{ site.Title }}</strong><small>{{ site.Params.unit }} · OIST</small></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <span class="sr-only">Menu</span><span class="bars" aria-hidden="true"></span>
+      <span class="sr-only">{{ i18n "menu" }}</span><span class="bars" aria-hidden="true"></span>
     </button>
-    <nav id="site-nav" class="site-nav" aria-label="Main">
+    <nav id="site-nav" class="site-nav" aria-label="{{ i18n "main_navigation" }}">
       <ul>
         {{- $current := . }}
         {{- range site.Menus.main }}
         {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
         {{- with .Page }}{{ if and (not $current.IsHome) (eq .Section $current.Section) (not .IsHome) }}{{ $active = true }}{{ end }}{{ end }}
         <li><a href="{{ .URL }}"{{ if $active }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+        {{- end }}
+        {{- /* Language switcher: this page in the other language, or that language's home page. */}}
+        {{- $others := .Translations }}
+        {{- if not $others }}{{ $others = site.Home.Translations }}{{ end }}
+        {{- range $others }}
+        <li class="lang-switch"><a href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Locale }}" title="{{ i18n "language_switch_label" }}">{{ i18n "language_switch" }}</a></li>
         {{- end }}
       </ul>
     </nav>

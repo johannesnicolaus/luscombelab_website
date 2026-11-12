@@ -20,7 +20,7 @@
 {{ with .Params.items }}
 <section class="section section-tint">
   <div class="wrap">
-    <h2 class="section-title">{{ $.Params.items_title | default "Videos & images" }}</h2>
+    <h2 class="section-title">{{ $.Params.items_title | default (i18n "videos_and_images") }}</h2>
     <div class="media-grid">
       {{ range . }}
       {{ $item := . }}

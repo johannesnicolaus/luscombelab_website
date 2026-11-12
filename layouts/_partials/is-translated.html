@@ -1,0 +1,13 @@
+{{- /*
+True if the page really exists in its language: always for the default language, and for
+other languages only when there is a "name.<lang>.md" file. Pages shown under /ja/ through
+the English fallback mount (see hugo.toml) return false.
+*/ -}}
+{{- $ok := true -}}
+{{- if ne .Language.Locale site.Params.defaultLang -}}
+  {{- $ok = false -}}
+  {{- with .File -}}
+    {{- $ok = strings.Contains .LogicalName (printf ".%s." $.Language.Locale) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $ok -}}

@@ -6,7 +6,18 @@
 {{- with .Params.intro }}{{ $desc = . | markdownify | plainify }}{{ end }}
 {{- with .Params.description }}{{ $desc = . }}{{ end }}
 <meta name="description" content="{{ $desc }}">
-<link rel="canonical" href="{{ .Permalink }}">
+{{- /* Untranslated pages under /ja/ point search engines to the English original. */}}
+{{- $translated := partial "is-translated.html" . }}
+{{- $canonical := .Permalink }}
+{{- if not $translated }}{{ range .Translations }}{{ if eq .Language.Locale site.Params.defaultLang }}{{ $canonical = .Permalink }}{{ end }}{{ end }}{{ end }}
+<link rel="canonical" href="{{ $canonical }}">
+{{- if $translated }}
+{{- range .AllTranslations }}{{ if partial "is-translated.html" . }}
+<link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">
+{{- if eq .Language.Locale site.Params.defaultLang }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+{{- end }}{{ end }}{{ end }}
+{{- end }}
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:type" content="website">

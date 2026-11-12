@@ -1,0 +1,109 @@
+# 画面上の固定テキスト（テンプレート用）。ページ本文は content/ の *.ja.md に書きます。
+# キーは en.yaml と同じものを使います。ここにないキーは英語で表示されます。
+
+# ヘッダー・フッター
+skip_to_content: 本文へ移動
+menu: メニュー
+main_navigation: メインメニュー
+language_switch: English
+language_switch_label: View this page in English
+contact: お問い合わせ
+send_us_a_message: メッセージを送る
+elsewhere: 関連リンク
+unit_page_at_oist: OIST のユニットページ
+orcid_pi: ORCID（N. M. ラスカム）
+edit_site: サイトを編集
+not_translated: このページはまだ日本語に翻訳されていません。英語版を表示しています。
+
+# ホーム
+our_research: 研究内容
+join_us: メンバー募集
+plankton_gallery_link: プランクトンギャラリーで <em>Oikopleura dioica</em>（オタマボヤ）を見る
+videos: 動画
+plankton_gallery: プランクトンギャラリー
+research_topics: 研究テーマ
+latest_publications: 最新の論文
+all_publications_link: 論文一覧
+cta_title: 研究室への参加に興味がありますか？
+cta_text: 生物学、計算科学をはじめ、さまざまな分野の学生、インターン、ポスドクを歓迎しています。
+open_positions: 募集情報
+
+# メンバー
+group_photo_alt: 集合写真
+group-professor: 教授
+group-scientists: 研究員
+group-technicians: 技術員
+group-students: 学生
+group-interns: インターン
+group-visiting-researchers: 客員研究員
+group-administration: RUA
+members: メンバー
+collaborators: 共同研究者
+former_members: 過去のメンバー
+website: ウェブサイト
+
+# 論文
+selected_publications: 主な論文
+journal_covers: 表紙に選ばれた論文
+cover_of: "%s の表紙"
+all_publications: 論文一覧
+search_publications: 論文を検索
+search_placeholder: タイトル、著者、雑誌名、年で検索…
+type: 種類
+all_types: すべての種類
+type_articles: 原著論文
+type_reviews: 総説
+type_preprints: プレプリント
+type_books: 書籍・章
+no_matches: 該当する論文はありません。
+undated: 年不明
+more_authors: "… ほか %d 名"
+badge_preprint: プレプリント
+badge_review: 総説
+badge_book: 書籍
+full_text: 全文
+preprint: プレプリント
+code: コード
+data: データ
+
+# 日付（Go の書式: 2006 = 年, 1 = 月, 2 = 日）
+date_month: 2006年1月
+date_day: 2006年1月2日
+
+# 募集
+current_openings: 現在の募集
+deadline: 締切
+details_how_to_apply: 詳細と応募方法
+how_to_apply: 応募方法
+learn_more: 詳しく見る
+contact_us: お問い合わせ
+type-postdoc: ポスドク
+type-phd: 博士課程
+type-internship: インターンシップ
+type-technician: 技術員
+type-staff: スタッフ
+type-other: その他
+
+# プランクトンギャラリー
+videos_and_images: 動画と画像
+play_video: "動画を再生: %s"
+
+# お問い合わせ
+honeypot: この欄は空のままにしてください
+name: お名前
+email: メールアドレス
+affiliation: 所属
+optional: （任意）
+topic: お問い合わせの種類
+topic_general: 一般的なお問い合わせ
+topic_phd: 博士課程・ローテーション
+topic_internship: リサーチインターンシップ
+topic_postdoc: ポスドク・スタッフ職
+topic_collaboration: 共同研究
+topic_resources: データ・リソースの利用
+message: メッセージ
+send_message: 送信する
+get_in_touch: 連絡先
+pi_name: ニコラス・ラスカム 教授
+address: 所在地
+open_in_google_maps: Google マップで開く

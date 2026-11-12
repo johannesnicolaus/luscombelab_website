@@ -1,0 +1,109 @@
+# Interface text used by the templates (layouts/). Page content lives in content/.
+# Every key here needs a counterpart in ja.yaml; a missing Japanese key falls back to English.
+
+# Header, footer, general
+skip_to_content: Skip to content
+menu: Menu
+main_navigation: Main
+language_switch: 日本語
+language_switch_label: このページを日本語で表示
+contact: Contact
+send_us_a_message: Send us a message
+elsewhere: Elsewhere
+unit_page_at_oist: Unit page at OIST
+orcid_pi: ORCID (N. M. Luscombe)
+edit_site: Edit site
+not_translated: ""
+
+# Home
+our_research: Our research
+join_us: Join us
+plankton_gallery_link: Meet <em>Oikopleura dioica</em> in the plankton gallery
+videos: Videos
+plankton_gallery: Plankton gallery
+research_topics: Research topics
+latest_publications: Latest publications
+all_publications_link: All publications
+cta_title: Interested in joining us?
+cta_text: We welcome students, interns and postdocs from biology, computation and beyond.
+open_positions: Open positions
+
+# People
+group_photo_alt: Lab group photo
+group-professor: Professor
+group-scientists: Scientists
+group-technicians: Technicians
+group-students: Students
+group-interns: Interns
+group-visiting-researchers: Visiting researchers
+group-administration: Administration
+members: Members
+collaborators: Collaborators
+former_members: Former members
+website: Website
+
+# Publications
+selected_publications: Selected publications
+journal_covers: Journal covers
+cover_of: Cover of %s
+all_publications: All publications
+search_publications: Search publications
+search_placeholder: Search title, author, journal, year…
+type: Type
+all_types: All types
+type_articles: Articles
+type_reviews: Reviews
+type_preprints: Preprints
+type_books: Books & chapters
+no_matches: No publications match your search.
+undated: Undated
+more_authors: "… %d more authors"
+badge_preprint: Preprint
+badge_review: Review
+badge_book: Book
+full_text: Full text
+preprint: Preprint
+code: Code
+data: Data
+
+# Lab photos and dates (Go time layouts: 2006 = year, January = month name, 1 = month, 2 = day)
+date_month: January 2006
+date_day: 2 January 2006
+
+# Open positions
+current_openings: Current openings
+deadline: Deadline
+details_how_to_apply: Details & how to apply
+how_to_apply: How to apply
+learn_more: Learn more
+contact_us: Contact us
+type-postdoc: Postdoc
+type-phd: PhD
+type-internship: Internship
+type-technician: Technician
+type-staff: Staff
+type-other: Other
+
+# Plankton gallery
+videos_and_images: Videos & images
+play_video: "Play video: %s"
+
+# Contact
+honeypot: Leave this empty
+name: Name
+email: E-mail
+affiliation: Affiliation
+optional: (optional)
+topic: Topic
+topic_general: General enquiry
+topic_phd: PhD / rotation
+topic_internship: Research internship
+topic_postdoc: Postdoc / staff position
+topic_collaboration: Collaboration
+topic_resources: Data & resources access
+message: Message
+send_message: Send message
+get_in_touch: Get in touch
+pi_name: Prof. Nicholas M. Luscombe
+address: Address
+open_in_google_maps: Open in Google Maps

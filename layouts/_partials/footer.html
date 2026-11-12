@@ -5,18 +5,18 @@
       <p>{{ site.Params.institution }}<br>{{ site.Params.address }}</p>
     </div>
     <div>
-      <p class="footer-title">Contact</p>
+      <p class="footer-title">{{ i18n "contact" }}</p>
       <p>{{ partial "email.html" site.Params.email }}<br>
-        <a href="{{ "/contact/" | relURL }}">Send us a message</a></p>
+        <a href="{{ "/contact/" | relLangURL }}">{{ i18n "send_us_a_message" }}</a></p>
     </div>
     <div>
-      <p class="footer-title">Elsewhere</p>
-      <p><a href="{{ site.Params.oistUrl }}" target="_blank" rel="noopener">Unit page at OIST</a><br>
-        <a href="https://orcid.org/{{ site.Params.orcid }}" target="_blank" rel="noopener">ORCID (N. M. Luscombe)</a></p>
+      <p class="footer-title">{{ i18n "elsewhere" }}</p>
+      <p><a href="{{ site.Params.oistUrl }}" target="_blank" rel="noopener">{{ i18n "unit_page_at_oist" }}</a><br>
+        <a href="https://orcid.org/{{ site.Params.orcid }}" target="_blank" rel="noopener">{{ i18n "orcid_pi" }}</a></p>
     </div>
   </div>
   <div class="wrap footer-bottom">
     <span>© {{ now.Year }} {{ site.Title }}, OIST</span>
-    <a href="{{ "/admin/" | relURL }}" rel="nofollow">Edit site</a>
+    <a href="{{ "/admin/" | relURL }}" rel="nofollow">{{ i18n "edit_site" }}</a>
   </div>
 </footer>

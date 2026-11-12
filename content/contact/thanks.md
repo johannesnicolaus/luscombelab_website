@@ -1,6 +1,5 @@
 ---
 title: Thank you
-url: /contact/thanks/
 sitemap:
   disable: true
 ---

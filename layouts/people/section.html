@@ -4,7 +4,7 @@
 {{ with .Params.group_photo }}
 <section class="section section-flush">
   <div class="wrap group-photo">
-    {{ partial "img.html" (dict "src" . "alt" ($.Params.group_photo_alt | default "Lab group photo") "widths" (slice 800 1200 1600 2000) "sizes" "(min-width: 1180px) 1120px, 100vw" "eager" true) }}
+    {{ partial "img.html" (dict "src" . "alt" ($.Params.group_photo_alt | default (i18n "group_photo_alt")) "widths" (slice 800 1200 1600 2000) "sizes" "(min-width: 1180px) 1120px, 100vw" "eager" true) }}
   </div>
 </section>
 {{ end }}
@@ -17,7 +17,7 @@
       {{ $g := . }}
       {{ with where $current "Params.group" $g }}
       <div class="people-group">
-        <h2 class="section-title">{{ $g }}</h2>
+        <h2 class="section-title">{{ i18n (printf "group-%s" (urlize $g)) | default $g }}</h2>
         <div class="people-grid">
           {{ range .ByWeight }}{{ partial "person-card.html" . }}{{ end }}
         </div>
@@ -29,7 +29,7 @@
     {{ range $current }}{{ if not (in $groups .Params.group) }}{{ $other = $other | append . }}{{ end }}{{ end }}
     {{ with $other }}
     <div class="people-group">
-      <h2 class="section-title">Members</h2>
+      <h2 class="section-title">{{ i18n "members" }}</h2>
       <div class="people-grid">
         {{ range (sort . "Weight") }}{{ partial "person-card.html" . }}{{ end }}
       </div>
@@ -41,7 +41,7 @@
 {{ with .Params.collaborators }}
 <section class="section section-tint">
   <div class="wrap">
-    <h2 class="section-title">Collaborators</h2>
+    <h2 class="section-title">{{ i18n "collaborators" }}</h2>
     <ul class="collab-list">
       {{ range . }}
       <li>{{ if .url }}<a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a>{{ else }}<strong>{{ .name }}</strong>{{ end }}{{ with .affiliation }}<span class="muted">{{ . }}</span>{{ end }}</li>
@@ -55,7 +55,7 @@
 {{ if or .Params.alumni $formerPages }}
 <section class="section">
   <div class="wrap">
-    <h2 class="section-title">Former members</h2>
+    <h2 class="section-title">{{ i18n "former_members" }}</h2>
     <ul class="alumni-list">
       {{ range $formerPages.ByWeight }}
       <li><strong>{{ .Title }}</strong>{{ with .Params.role }}, {{ . }}{{ end }}{{ with .Params.former_note }} <span class="muted">({{ . }})</span>{{ end }}</li>

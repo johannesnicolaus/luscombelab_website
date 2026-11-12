@@ -15,6 +15,7 @@
   --shadow: 0 1px 2px rgba(11, 46, 69, .06), 0 6px 24px rgba(11, 46, 69, .06);
   --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
   --sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --jp-sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, "Noto Sans JP", sans-serif;
   --wrap: 1180px;
 }
 
@@ -59,7 +60,7 @@ p { margin: 0 0 1em; }
 .brand-text small { font-size: .72rem; color: var(--muted); letter-spacing: .02em; }
 .site-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 2px; margin: 0; padding: 0; }
 .site-nav a {
-  display: block; padding: 8px 11px; border-radius: 8px; font-size: .9rem; font-weight: 500;
+  display: block; padding: 8px; border-radius: 8px; font-size: .9rem; font-weight: 500;
   color: var(--ink-soft); text-decoration: none;
 }
 .site-nav a:hover { background: var(--teal-tint); color: var(--teal-dark); }
@@ -72,7 +73,7 @@ p { margin: 0 0 1em; }
 .nav-toggle[aria-expanded="true"] .bars::before { transform: translateY(7px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .bars::after { transform: translateY(-7px) rotate(-45deg); }
 
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
   .nav-toggle { display: block; }
   .site-nav {
     position: absolute; left: 0; right: 0; top: 100%;
@@ -288,3 +289,13 @@ a.cover:hover img { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(11
 .people-group + .people-group { margin-top: 44px; }
 .person-compact { grid-template-columns: 96px 1fr; align-items: center; }
 .person-compact .person-photo img, .person-compact .person-initials { width: 96px; height: 96px; font-size: 1.7rem; }
+
+/* ---------------------------------------------------------------- Japanese */
+/* Inter / Source Serif have no Japanese glyphs: use the system's Japanese fonts after them. */
+:lang(ja) { --sans: Inter, var(--jp-sans); --serif: "Source Serif 4", var(--jp-sans); line-break: strict; word-break: normal; overflow-wrap: anywhere; }
+:lang(ja) body, body:lang(ja) { line-height: 1.8; }
+:lang(ja) h1, :lang(ja) h2, :lang(ja) h3 { letter-spacing: .02em; line-height: 1.4; }
+.lang-switch a { border: 1px solid var(--line); }
+@media (min-width: 1201px) { .lang-switch { margin-left: 4px; } }
+.untranslated-note { margin: 0; padding: 10px 0; background: var(--teal-tint); color: var(--teal-dark); font-size: .9rem; }
+.untranslated-note .wrap { display: block; }

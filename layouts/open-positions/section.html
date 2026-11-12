@@ -17,15 +17,15 @@
 {{ with $open }}
 <section class="section section-tint">
   <div class="wrap">
-    <h2 class="section-title">Current openings</h2>
+    <h2 class="section-title">{{ i18n "current_openings" }}</h2>
     <div class="resource-grid">
       {{ range . }}
       <article class="card position">
-        <p class="eyebrow">{{ .type }}</p>
+        <p class="eyebrow">{{ with .type }}{{ i18n (printf "type-%s" (urlize .)) | default . }}{{ end }}</p>
         <h3>{{ .title }}</h3>
         {{ with .description }}<p>{{ . | markdownify }}</p>{{ end }}
-        {{ with .deadline }}<p class="muted">Deadline: {{ time.Format "2 January 2006" . }}</p>{{ end }}
-        {{ with .link }}<p><a class="arrow-link" href="{{ . }}" target="_blank" rel="noopener">Details &amp; how to apply</a></p>{{ end }}
+        {{ with .deadline }}<p class="muted">{{ i18n "deadline" }}: {{ time.Format (i18n "date_day") . }}</p>{{ end }}
+        {{ with .link }}<p><a class="arrow-link" href="{{ . }}" target="_blank" rel="noopener">{{ i18n "details_how_to_apply" }}</a></p>{{ end }}
       </article>
       {{ end }}
     </div>
@@ -36,15 +36,15 @@
 {{ with .Params.apply_links }}
 <section class="section{{ if not $open }} section-tint{{ end }}">
   <div class="wrap">
-    <h2 class="section-title">How to apply</h2>
+    <h2 class="section-title">{{ i18n "how_to_apply" }}</h2>
     <div class="resource-grid">
       {{ range . }}
       <article class="card apply">
         <h3><a href="{{ .url }}" target="_blank" rel="noopener">{{ .label }}</a></h3>
         {{ with .description }}<p>{{ . | markdownify }}</p>{{ end }}
         <p class="apply-actions">
-          <a class="arrow-link" href="{{ .url }}" target="_blank" rel="noopener">Learn more</a>
-          {{ with .subject }}<a class="arrow-link" href="{{ "/contact/" | relURL }}?subject={{ . }}">Contact us</a>{{ end }}
+          <a class="arrow-link" href="{{ .url }}" target="_blank" rel="noopener">{{ i18n "learn_more" }}</a>
+          {{ with .subject }}<a class="arrow-link" href="{{ "/contact/" | relLangURL }}?subject={{ . }}">{{ i18n "contact_us" }}</a>{{ end }}
         </p>
       </article>
       {{ end }}

@@ -1,5 +1,6 @@
 baseURL = "https://luscombelab.netlify.app/"   # change when the custom domain is set
-locale = "en"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
 title = "Luscombe Lab"
 enableRobotsTXT = true
 summaryLength = 30
@@ -15,6 +16,8 @@ disableKinds = ["taxonomy", "term"]
     path = "{/people/**,/lab-photos/**}"
 
 [params]
+  # Must match defaultContentLanguage; used to tell translated pages from English fallbacks
+  defaultLang = "en"
   # Order of member groups on the People page (must match the "Group" options in static/admin/config.yml)
   peopleGroups = ["Professor", "Scientists", "Technicians", "Students", "Interns", "Visiting researchers", "Administration"]
   unit = "Genomics and Regulatory Systems Unit"
@@ -24,40 +27,111 @@ disableKinds = ["taxonomy", "term"]
   address = "1919-1 Tancha, Onna, Kunigami District, Okinawa 904-0495, Japan"
   orcid = "0000-0001-5293-4778"
   oistUrl = "https://www.oist.jp/research/research-units/grsu"
+  # Google Tag Manager container (set up Google Analytics inside GTM). Empty = no tracking.
+  # Only included in production builds (Netlify), not with `hugo server`.
+  gtmId = "GTM-MPMVCQRM"
 
-[menus]
-  [[menus.main]]
+# ---------------------------------------------------------------- Languages
+# English is served at /, Japanese at /ja/. A page is translated by adding a file
+# with the same name and a .ja suffix next to it (e.g. content/contact/_index.ja.md).
+# Pages without a Japanese file are shown in English under /ja/ (see module.mounts).
+[languages]
+  [languages.en]
+    locale = "en"
+    weight = 1
+    title = "Luscombe Lab"
+  [languages.ja]
+    locale = "ja"
+    weight = 2
+    title = "ラスカム研究室"
+    [languages.ja.params]
+      unit = "ゲノム・遺伝子制御システム科学ユニット"
+      institution = "沖縄科学技術大学院大学（OIST）"
+      address = "〒904-0495 沖縄県国頭郡恩納村字谷茶1919-1"
+      description = "ラスカム研究室（OIST ゲノム・遺伝子制御システム科学ユニット）は、海産プランクトンのオタマボヤ（Oikopleura dioica）を用いて、遺伝子制御、ゲノム進化、集団ゲノミクスを研究しています。"
+      oistUrl = "https://www.oist.jp/ja/research/research-units/grsu"
+
+  [[languages.en.menus.main]]
     name = "Home"
     pageRef = "/"
     weight = 10
-  [[menus.main]]
+  [[languages.en.menus.main]]
     name = "People"
     pageRef = "/people"
     weight = 20
-  [[menus.main]]
+  [[languages.en.menus.main]]
     name = "Publications"
     pageRef = "/publications"
     weight = 30
-  [[menus.main]]
+  [[languages.en.menus.main]]
     name = "Lab Photos"
     pageRef = "/lab-photos"
     weight = 40
-  [[menus.main]]
+  [[languages.en.menus.main]]
     name = "Plankton Gallery"
     pageRef = "/plankton-gallery"
     weight = 50
-  [[menus.main]]
+  [[languages.en.menus.main]]
     name = "Resources"
     pageRef = "/resources"
     weight = 60
-  [[menus.main]]
+  [[languages.en.menus.main]]
     name = "Open Positions"
     pageRef = "/open-positions"
     weight = 70
-  [[menus.main]]
+  [[languages.en.menus.main]]
     name = "Contact"
     pageRef = "/contact"
     weight = 80
+
+  [[languages.ja.menus.main]]
+    name = "ホーム"
+    pageRef = "/"
+    weight = 10
+  [[languages.ja.menus.main]]
+    name = "メンバー"
+    pageRef = "/people"
+    weight = 20
+  [[languages.ja.menus.main]]
+    name = "論文"
+    pageRef = "/publications"
+    weight = 30
+  [[languages.ja.menus.main]]
+    name = "ラボ写真"
+    pageRef = "/lab-photos"
+    weight = 40
+  [[languages.ja.menus.main]]
+    name = "プランクトンギャラリー"
+    pageRef = "/plankton-gallery"
+    weight = 50
+  [[languages.ja.menus.main]]
+    name = "リソース"
+    pageRef = "/resources"
+    weight = 60
+  [[languages.ja.menus.main]]
+    name = "募集"
+    pageRef = "/open-positions"
+    weight = 70
+  [[languages.ja.menus.main]]
+    name = "お問い合わせ"
+    pageRef = "/contact"
+    weight = 80
+
+# Content mounts. The first mount holds the Japanese files (name.ja.md). The second builds
+# every English file for both languages, so a page with no .ja.md yet still exists under /ja/
+# (in English, with a note; see layouts/_partials/is-translated.html). The earlier mount wins,
+# so a real .ja.md file always replaces the English fallback.
+[module]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+    files = ["*.ja.md", "**/*.ja.md"]
+  [[module.mounts]]
+    source = "content"
+    target = "content"
+    files = ["! *.ja.md", "! **/*.ja.md"]
+    [module.mounts.sites.matrix]
+      languages = ["en", "ja"]
 
 [markup.goldmark.renderer]
   unsafe = false

@@ -6,7 +6,7 @@
 {{ with $pubs.selected }}
 <section class="section">
   <div class="wrap">
-    <h2 class="section-title">Selected publications</h2>
+    <h2 class="section-title">{{ i18n "selected_publications" }}</h2>
     <ol class="pub-list pub-list-selected">
       {{ range . }}{{ partial "pub/entry.html" (dict "pub" . "members" $members) }}{{ end }}
     </ol>
@@ -19,7 +19,7 @@
 {{ with $covers }}
 <section class="section section-tint" id="covers">
   <div class="wrap">
-    <h2 class="section-title">{{ $.Params.covers_title | default "Journal covers" }}</h2>
+    <h2 class="section-title">{{ $.Params.covers_title | default (i18n "journal_covers") }}</h2>
     {{ $years := slice }}
     {{ range sort . "year" "desc" }}{{ if not (in $years .year) }}{{ $years = $years | append .year }}{{ end }}{{ end }}
     {{ $all := . }}
@@ -30,7 +30,7 @@
       <div class="cover-grid">
         {{ range where $all "year" $y }}
         {{ $label := delimit (slice .journal .issue) ", " }}
-        {{ $img := partial "img.html" (dict "src" .image "alt" (printf "Cover of %s" $label) "widths" (slice 240 360 480) "sizes" "180px") }}
+        {{ $img := partial "img.html" (dict "src" .image "alt" (printf (i18n "cover_of") $label) "widths" (slice 240 360 480) "sizes" "180px") }}
         {{ $href := .url | default "" }}{{ with .doi }}{{ $href = printf "https://doi.org/%s" . }}{{ end }}
         {{ if $href }}<a class="cover" href="{{ $href }}" target="_blank" rel="noopener" title="{{ $label }}">{{ $img }}</a>
         {{ else }}<div class="cover" title="{{ $label }}">{{ $img }}</div>{{ end }}
@@ -45,27 +45,27 @@
 <section class="section" id="all">
   <div class="wrap">
     <div class="section-head">
-      <h2 class="section-title">All publications <span class="count" data-pub-count>{{ len $pubs.list }}</span></h2>
+      <h2 class="section-title">{{ i18n "all_publications" }} <span class="count" data-pub-count>{{ len $pubs.list }}</span></h2>
     </div>
     <form class="pub-filter" role="search" onsubmit="return false">
-      <label class="sr-only" for="pub-search">Search publications</label>
-      <input id="pub-search" type="search" placeholder="Search title, author, journal, year…" autocomplete="off">
-      <label class="sr-only" for="pub-type">Type</label>
+      <label class="sr-only" for="pub-search">{{ i18n "search_publications" }}</label>
+      <input id="pub-search" type="search" placeholder="{{ i18n "search_placeholder" }}" autocomplete="off">
+      <label class="sr-only" for="pub-type">{{ i18n "type" }}</label>
       <select id="pub-type">
-        <option value="">All types</option>
-        <option value="article">Articles</option>
-        <option value="review">Reviews</option>
-        <option value="preprint">Preprints</option>
-        <option value="book-chapter">Books &amp; chapters</option>
+        <option value="">{{ i18n "all_types" }}</option>
+        <option value="article">{{ i18n "type_articles" }}</option>
+        <option value="review">{{ i18n "type_reviews" }}</option>
+        <option value="preprint">{{ i18n "type_preprints" }}</option>
+        <option value="book-chapter">{{ i18n "type_books" }}</option>
       </select>
     </form>
-    <p class="pub-empty" hidden>No publications match your search.</p>
+    <p class="pub-empty" hidden>{{ i18n "no_matches" }}</p>
     {{ $years := slice }}
     {{ range $pubs.list }}{{ if not (in $years .year) }}{{ $years = $years | append .year }}{{ end }}{{ end }}
     {{ range $years }}
     {{ $y := . }}
     <div class="pub-year" data-year="{{ $y }}">
-      <h3 class="year-label">{{ if $y }}{{ $y }}{{ else }}Undated{{ end }}</h3>
+      <h3 class="year-label">{{ if $y }}{{ $y }}{{ else }}{{ i18n "undated" }}{{ end }}</h3>
       <ol class="pub-list">
         {{ range where $pubs.list "year" $y }}{{ partial "pub/entry.html" (dict "pub" . "members" $members) }}{{ end }}
       </ol>
