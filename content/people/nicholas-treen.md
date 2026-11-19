@@ -1,6 +1,8 @@
 ---
 title: "Nicholas Treen"
 role: "Staff Scientist"
+photo: /uploads/people/nicholas-treen.webp
+photo_anchor: Center
 group: "Scientists"
 weight: 20
 former: false
