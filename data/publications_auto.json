@@ -1,6 +1,24 @@
 [
  {
   "authors": [
+   "C Plessy",
+   "M Mahdi",
+   "T Fujita",
+   "MC Frith",
+   "NM Luscombe"
+  ],
+  "date": "2026-11-19",
+  "doi": "10.64898/2026.11.18.767494",
+  "id": "doi:10.64898/2026.11.18.767494",
+  "oa_url": "https://www.biorxiv.org/content/biorxiv/early/2026/11/18/2026.11.18.767494.full.pdf",
+  "openalex": "W7236738694",
+  "title": "nf-core/pairgenomealign: a scalable pipeline for pairwise whole-genome alignment",
+  "type": "preprint",
+  "venue": "bioRxiv",
+  "year": 2026
+ },
+ {
+  "authors": [
    "X Du-Harpur",
    "C Gânier",
    "P Mazin",
@@ -36,6 +54,7 @@
   "issue": "1",
   "oa_url": "https://www.nature.com/articles/s44384-026-00048-7.pdf",
   "openalex": "W7151517763",
+  "pages": "12",
   "title": "The impact of visual-auditory interactions on well-being: colour and soundscapes in urban spaces",
   "type": "article",
   "venue": "npj Acoustics",
@@ -217,6 +236,7 @@
   "issue": "1",
   "oa_url": "https://academic.oup.com/mbe/advance-article-pdf/doi/10.1093/molbev/msae260/61210424/msae260.pdf",
   "openalex": "W4405457822",
+  "pages": "msae260",
   "pmid": "39686543",
   "title": "Less, but More: New Insights From Appendicularians on Chordate Fgf Evolution and the Divergence of Tunicate Lifestyles",
   "type": "article",
@@ -234,7 +254,7 @@
   "date": "2024-11-29",
   "doi": "10.1101/2024.11.28.625692",
   "id": "doi:10.1101/2024.11.28.625692",
-  "oa_url": "https://doi.org/10.1101/2024.11.28.625692",
+  "oa_url": "https://www.biorxiv.org/content/biorxiv/early/2024/11/29/2024.11.28.625692.full.pdf",
   "openalex": "W4404848100",
   "title": "Cross-tissue isoform switches by human transcription factors suggest a widespread regulatory mechanism",
   "type": "preprint",
@@ -298,7 +318,7 @@
    "NM Luscombe",
    "C Plessy"
   ],
-  "date": "2024-08-16",
+  "date": "2024-08-20",
   "doi": "10.1093/gbe/evae182",
   "id": "doi:10.1093/gbe/evae182",
   "issue": "9",
@@ -331,7 +351,7 @@
   "doi": "10.1038/s41594-024-01363-x",
   "id": "doi:10.1038/s41594-024-01363-x",
   "issue": "9",
-  "oa_url": "https://doi.org/10.1038/s41594-024-01363-x",
+  "oa_url": "https://www.nature.com/articles/s41594-024-01363-x.pdf",
   "openalex": "W4400986144",
   "pages": "1439-1447",
   "pmid": "39054355",
@@ -363,15 +383,11 @@
    "C Cañestro",
    "NM Luscombe"
   ],
-  "date": "2023-05-09",
   "doi": "10.1101/gr.278295.123",
   "id": "doi:10.1101/gr.278295.123",
   "issue": "3",
-  "oa_url": "https://www.biorxiv.org/content/biorxiv/early/2023/05/09/2023.05.09.539028.full.pdf",
-  "openalex": "W4376107798",
   "pages": "426-440",
   "pmid": "38621828",
-  "preprint_doi": "10.1101/2023.05.09.539028",
   "title": "Extreme genome scrambling in marine planktonic <i>Oikopleura dioica</i> cryptic species",
   "type": "article",
   "venue": "Genome Res",
@@ -447,6 +463,7 @@
   "id": "doi:10.7554/elife.82717",
   "oa_url": "https://doi.org/10.7554/elife.82717",
   "openalex": "W4385476319",
+  "pages": "e82717",
   "pmid": "37530410",
   "title": "scRNA-sequencing in chick suggests a probabilistic model for cell fate allocation at the neural plate border",
   "type": "article",
@@ -542,6 +559,7 @@
   "id": "doi:10.7554/elife.73189",
   "oa_url": "https://doi.org/10.7554/elife.73189",
   "openalex": "W4323037005",
+  "pages": "e73189",
   "pmid": "36867045",
   "title": "A gene regulatory network for neural induction",
   "type": "article",
@@ -590,7 +608,7 @@
  },
  {
   "authors": [
-   "PA Bump",
+   "FM Martín-Zamora",
    "Y Liang",
    "K Guynes",
    "AM Carrillo‐Baltodano",
@@ -699,7 +717,7 @@
   "oa_url": "http://www.jidonline.org/article/S0022202X22019911/pdf",
   "openalex": "W4309472554",
   "pages": "S188-S188",
-  "title": "048 The transcriptional landscape of hidradenitis suppurativa at single-cell and spatial resolution",
+  "title": "The transcriptional landscape of hidradenitis suppurativa at single-cell and spatial resolution",
   "type": "article",
   "venue": "Journal of Investigative Dermatology",
   "volume": "142",
@@ -731,7 +749,7 @@
    "NM Luscombe",
    "MV Purohit"
   ],
-  "date": "2022-02-17",
+  "date": "2022-02-18",
   "doi": "10.1007/978-3-030-96600-3_2",
   "id": "doi:10.1007/978-3-030-96600-3_2",
   "openalex": "W4213120463",
@@ -779,7 +797,7 @@
   "pages": "71-84",
   "pmid": "34963663",
   "title": "Meta-analysis of human and mouse ALS astrocytes reveals multi-omic signatures of inflammatory reactive states",
-  "type": "article",
+  "type": "review",
   "venue": "Genome Research",
   "volume": "32",
   "year": 2021
@@ -822,6 +840,31 @@
  },
  {
   "authors": [
+   "M Rafiee",
+   "JA Zagalak",
+   "S Sidorov",
+   "S Steinhauser",
+   "K Davey",
+   "J Ule",
+   "NM Luscombe"
+  ],
+  "date": "2021-12-06",
+  "doi": "10.1093/nar/gkab1180",
+  "id": "doi:10.1093/nar/gkab1180",
+  "issue": "22",
+  "oa_url": "https://academic.oup.com/nar/article-pdf/49/22/13092/41811258/gkab1180.pdf",
+  "openalex": "W4225871107",
+  "pages": "13092-13107",
+  "pmid": "34871434",
+  "preprint_doi": "10.1101/2020.07.13.200212",
+  "title": "Chromatin-contact atlas reveals disorder-mediated protein interactions and moonlighting chromatin-associated RBPs",
+  "type": "article",
+  "venue": "Nucleic Acids Research",
+  "volume": "49",
+  "year": 2021
+ },
+ {
+  "authors": [
    "SMF Moya",
    "J Ehses",
    "KE Bauer",
@@ -846,31 +889,6 @@
   "type": "article",
   "venue": "International Journal of Molecular Sciences",
   "volume": "22",
-  "year": 2021
- },
- {
-  "authors": [
-   "M Rafiee",
-   "JA Zagalak",
-   "S Sidorov",
-   "S Steinhauser",
-   "K Davey",
-   "J Ule",
-   "NM Luscombe"
-  ],
-  "date": "2021-11-12",
-  "doi": "10.1093/nar/gkab1180",
-  "id": "doi:10.1093/nar/gkab1180",
-  "issue": "22",
-  "oa_url": "https://academic.oup.com/nar/article-pdf/49/22/13092/41811258/gkab1180.pdf",
-  "openalex": "W4225871107",
-  "pages": "13092-13107",
-  "pmid": "34871434",
-  "preprint_doi": "10.1101/2020.07.13.200212",
-  "title": "Chromatin-contact atlas reveals disorder-mediated protein interactions and moonlighting chromatin-associated RBPs",
-  "type": "article",
-  "venue": "Nucleic Acids Research",
-  "volume": "49",
   "year": 2021
  },
  {
@@ -1059,7 +1077,7 @@
    "NM Luscombe",
    "R Patani"
   ],
-  "date": "2021-03-06",
+  "date": "2021-03-09",
   "doi": "10.1093/brain/awab078",
   "id": "doi:10.1093/brain/awab078",
   "issue": "7",
@@ -1102,6 +1120,33 @@
  },
  {
   "authors": [
+   "OJ Ziff",
+   "DM Taha",
+   "H Crerar",
+   "BE Clarke",
+   "AM Chakrabarti",
+   "GP Kelly",
+   "J Neeves",
+   "GE Tyzack",
+   "NM Luscombe",
+   "R Patani"
+  ],
+  "date": "2021-03-04",
+  "doi": "10.1093/nar/gkab115",
+  "id": "doi:10.1093/nar/gkab115",
+  "issue": "6",
+  "oa_url": "https://academic.oup.com/nar/article-pdf/49/6/3168/36885043/gkab115.pdf",
+  "openalex": "W3135481266",
+  "pages": "3168-3184",
+  "pmid": "33684213",
+  "title": "Reactive astrocytes in ALS display diminished intron retention",
+  "type": "article",
+  "venue": "Nucleic Acids Research",
+  "volume": "49",
+  "year": 2021
+ },
+ {
+  "authors": [
    "AW Liu",
    "Y Tan",
    "A Masunaga",
@@ -1120,33 +1165,6 @@
   "type": "article",
   "venue": "F1000Research",
   "volume": "9",
-  "year": 2021
- },
- {
-  "authors": [
-   "OJ Ziff",
-   "DM Taha",
-   "H Crerar",
-   "BE Clarke",
-   "AM Chakrabarti",
-   "GP Kelly",
-   "J Neeves",
-   "GE Tyzack",
-   "NM Luscombe",
-   "R Patani"
-  ],
-  "date": "2021-02-10",
-  "doi": "10.1093/nar/gkab115",
-  "id": "doi:10.1093/nar/gkab115",
-  "issue": "6",
-  "oa_url": "https://academic.oup.com/nar/article-pdf/49/6/3168/36885043/gkab115.pdf",
-  "openalex": "W3135481266",
-  "pages": "3168-3184",
-  "pmid": "33684213",
-  "title": "Reactive astrocytes in ALS display diminished intron retention",
-  "type": "article",
-  "venue": "Nucleic Acids Research",
-  "volume": "49",
   "year": 2021
  },
  {
@@ -1313,7 +1331,7 @@
   "doi": "10.1038/s41586-020-2698-6",
   "id": "doi:10.1038/s41586-020-2698-6",
   "issue": "7832",
-  "oa_url": "http://europepmc.org/pmc/articles/PMC7611706",
+  "oa_url": "https://www.ncbi.nlm.nih.gov/pmc/articles/7611706",
   "openalex": "W3082714866",
   "pages": "126-132",
   "pmid": "32879494",
@@ -1325,23 +1343,25 @@
  },
  {
   "authors": [
-   "AW Liu",
-   "Y Tan",
-   "A Masunaga",
-   "C Plessy",
-   "NM Luscombe"
+   "GE Tyzack",
+   "G Manferrari",
+   "J Newcombe",
+   "NM Luscombe",
+   "R Luisier",
+   "R Patani"
   ],
-  "date": "2020-07-28",
-  "doi": "10.12688/f1000research.25019.1",
-  "id": "doi:10.12688/f1000research.25019.1",
-  "oa_url": "https://f1000research.com/articles/9-780/v1/pdf",
-  "openalex": "W3045720640",
-  "pages": "780-780",
-  "pmid": "33728042",
-  "title": "Centromere-specific antibody-mediated karyotyping of Okinawan Oikopleura dioica suggests the presence of three chromosomes",
+  "date": "2020-08-01",
+  "doi": "10.1093/brain/awaa205",
+  "id": "doi:10.1093/brain/awaa205",
+  "issue": "8",
+  "oa_url": "https://academic.oup.com/brain/article-pdf/143/8/e66/33774044/awaa205.pdf",
+  "openalex": "W3080606534",
+  "pages": "e66-e66",
+  "pmid": "32844195",
+  "title": "Paraspeckle components NONO and PSPC1 are not mislocalized from motor neuron nuclei in sporadic ALS",
   "type": "article",
-  "venue": "F1000Research",
-  "volume": "9",
+  "venue": "Brain",
+  "volume": "143",
   "year": 2020
  },
  {
@@ -1367,7 +1387,7 @@
    "H Nishida",
    "TA Onuma"
   ],
-  "date": "2020-07-17",
+  "date": "2020-08-01",
   "doi": "10.1111/dgd.12689",
   "id": "doi:10.1111/dgd.12689",
   "issue": "6",
@@ -1379,6 +1399,27 @@
   "type": "article",
   "venue": "Development Growth & Differentiation",
   "volume": "62",
+  "year": 2020
+ },
+ {
+  "authors": [
+   "AW Liu",
+   "Y Tan",
+   "A Masunaga",
+   "C Plessy",
+   "NM Luscombe"
+  ],
+  "date": "2020-07-28",
+  "doi": "10.12688/f1000research.25019.1",
+  "id": "doi:10.12688/f1000research.25019.1",
+  "oa_url": "https://f1000research.com/articles/9-780/v1/pdf",
+  "openalex": "W3045720640",
+  "pages": "780-780",
+  "pmid": "33728042",
+  "title": "Centromere-specific antibody-mediated karyotyping of Okinawan Oikopleura dioica suggests the presence of three chromosomes",
+  "type": "article",
+  "venue": "F1000Research",
+  "volume": "9",
   "year": 2020
  },
  {
@@ -1400,29 +1441,6 @@
   "title": "Streamlined Sampling and Cultivation of the Pelagic Cosmopolitan Larvacean, Oikopleura dioica",
   "type": "article",
   "venue": "Journal of Visualized Experiments",
-  "year": 2020
- },
- {
-  "authors": [
-   "GE Tyzack",
-   "G Manferrari",
-   "J Newcombe",
-   "NM Luscombe",
-   "R Luisier",
-   "R Patani"
-  ],
-  "date": "2020-06-09",
-  "doi": "10.1093/brain/awaa205",
-  "id": "doi:10.1093/brain/awaa205",
-  "issue": "8",
-  "oa_url": "https://academic.oup.com/brain/article-pdf/143/8/e66/33774044/awaa205.pdf",
-  "openalex": "W3080606534",
-  "pages": "e66-e66",
-  "pmid": "32844195",
-  "title": "Paraspeckle components NONO and PSPC1 are not mislocalized from motor neuron nuclei in sporadic ALS",
-  "type": "article",
-  "venue": "Brain",
-  "volume": "143",
   "year": 2020
  },
  {
@@ -1464,6 +1482,27 @@
   "type": "review",
   "venue": "Frontiers in Genetics",
   "volume": "11",
+  "year": 2020
+ },
+ {
+  "authors": [
+   "X Du-Harpur",
+   "FM Watt",
+   "NM Luscombe",
+   "M Lynch"
+  ],
+  "date": "2020-03-29",
+  "doi": "10.1111/bjd.18880",
+  "id": "doi:10.1111/bjd.18880",
+  "issue": "3",
+  "oa_url": "https://academic.oup.com/bjd/article-pdf/183/3/423/46341283/bjd0423.pdf",
+  "openalex": "W3001446745",
+  "pages": "423-430",
+  "pmid": "31960407",
+  "title": "What is AI? Applications of artificial intelligence to dermatology",
+  "type": "article",
+  "venue": "British Journal of Dermatology",
+  "volume": "183",
   "year": 2020
  },
  {
@@ -1555,27 +1594,6 @@
  },
  {
   "authors": [
-   "X Du-Harpur",
-   "FM Watt",
-   "NM Luscombe",
-   "M Lynch"
-  ],
-  "date": "2020-01-21",
-  "doi": "10.1111/bjd.18880",
-  "id": "doi:10.1111/bjd.18880",
-  "issue": "3",
-  "oa_url": "https://academic.oup.com/bjd/article-pdf/183/3/423/46341283/bjd0423.pdf",
-  "openalex": "W3001446745",
-  "pages": "423-430",
-  "pmid": "31960407",
-  "title": "What is AI? Applications of artificial intelligence to dermatology",
-  "type": "article",
-  "venue": "British Journal of Dermatology",
-  "volume": "183",
-  "year": 2020
- },
- {
-  "authors": [
    "J Pichon",
    "NM Luscombe",
    "C Plessy"
@@ -1591,26 +1609,6 @@
   "type": "article",
   "venue": "F1000Research",
   "volume": "8",
-  "year": 2019
- },
- {
-  "authors": [
-   "C Plessy",
-   "A Bliznina",
-   "A Masunaga",
-   "H Chien",
-   "S Kumar",
-   "J Pichon",
-   "Y Tan",
-   "AW Liu",
-   "NM Luscombe"
-  ],
-  "date": "2019-11-08",
-  "id": "openalex:W3008731176",
-  "openalex": "W3008731176",
-  "title": "Single-individual genome sequencing of the chordate Oikopleura dioica shows massive structural variations between animals of similar morphology",
-  "type": "article",
-  "venue": "The Molecular Biology Society of Japan",
   "year": 2019
  },
  {
@@ -1662,7 +1660,7 @@
    "NM Luscombe",
    "R Patani"
   ],
-  "date": "2019-07-05",
+  "date": "2019-08-01",
   "doi": "10.1093/brain/awz217",
   "id": "doi:10.1093/brain/awz217",
   "issue": "9",
@@ -1694,7 +1692,6 @@
   "openalex": "W2946723092",
   "pages": "988-998",
   "pmid": "31097474",
-  "preprint_doi": "10.1101/394692",
   "title": "Genome-wide reconstitution of chromatin transactions reveals that RSC preferentially disrupts H2AZ-containing nucleosomes",
   "type": "article",
   "venue": "Genome Research",
@@ -1905,7 +1902,7 @@
    "NM Luscombe",
    "R Patani"
   ],
-  "date": "2018-05-16",
+  "date": "2018-05-22",
   "doi": "10.1038/s41467-018-04373-8",
   "id": "doi:10.1038/s41467-018-04373-8",
   "issue": "1",
@@ -1965,7 +1962,7 @@
    "NM Luscombe",
    "A O’Garra"
   ],
-  "date": "2018-04-13",
+  "date": "2018-04-16",
   "doi": "10.1038/s41590-018-0083-5",
   "id": "doi:10.1038/s41590-018-0083-5",
   "issue": "5",
@@ -2358,11 +2355,12 @@
    "SM Pollard",
    "A Behrens"
   ],
-  "date": "2016-03-15",
+  "date": "2016-03-17",
   "doi": "10.7554/elife.08711",
   "id": "doi:10.7554/elife.08711",
   "oa_url": "https://doi.org/10.7554/elife.08711",
   "openalex": "W2307481467",
+  "pages": "e08711",
   "pmid": "26984279",
   "title": "Inactivation of the ATMIN/ATM pathway protects against glioblastoma formation",
   "type": "article",
@@ -3031,7 +3029,7 @@
    "ASN Seshasayee",
    "NM Luscombe"
   ],
-  "date": "2012-04-20",
+  "date": "2012-04-22",
   "doi": "10.1038/nature10995",
   "id": "doi:10.1038/nature10995",
   "issue": "7396",
@@ -3323,7 +3321,7 @@
    "NM Luscombe",
    "CT Gross"
   ],
-  "date": "2010-12-10",
+  "date": "2011-01-01",
   "doi": "10.1002/emmm.201000112",
   "id": "doi:10.1002/emmm.201000112",
   "issue": "1",
@@ -3335,7 +3333,7 @@
   "type": "article",
   "venue": "EMBO Molecular Medicine",
   "volume": "3",
-  "year": 2010
+  "year": 2011
  },
  {
   "authors": [
@@ -3527,7 +3525,7 @@
    "NM Luscombe",
    "A Akhtar"
   ],
-  "date": "2010-02-11",
+  "date": "2010-02-12",
   "doi": "10.1371/journal.pgen.1000846",
   "id": "doi:10.1371/journal.pgen.1000846",
   "issue": "2",
@@ -3669,7 +3667,7 @@
    "NM Luscombe",
    "P Klemm"
   ],
-  "date": "2008-03-03",
+  "date": "2008-03-04",
   "doi": "10.1007/s00438-008-0330-9",
   "id": "doi:10.1007/s00438-008-0330-9",
   "issue": "5",
@@ -3774,6 +3772,7 @@
   "issue": "S3",
   "oa_url": "https://bmcbioinformatics.biomedcentral.com/track/pdf/10.1186/1471-2105-6-S3-S1",
   "openalex": "W2109022411",
+  "pages": "S1",
   "title": "Transcription regulation: a genomic network",
   "type": "article",
   "venue": "BMC Bioinformatics",
@@ -3903,7 +3902,7 @@
    "SM Weissman",
    "MP Snyder"
   ],
-  "date": "2004-04-13",
+  "date": "2004-05-01",
   "doi": "10.1128/mcb.24.9.3804-3814.2004",
   "id": "doi:10.1128/mcb.24.9.3804-3814.2004",
   "issue": "9",
@@ -3925,7 +3924,7 @@
    "H Yu",
    "M Gerstein"
   ],
-  "date": "2003-10-10",
+  "date": "2003-10-12",
   "doi": "10.1093/bioinformatics/btg347",
   "id": "doi:10.1093/bioinformatics/btg347",
   "issue": "15",
@@ -3995,7 +3994,7 @@
    "N Echols",
    "CE Horak",
    "JT Chang",
-   "MP Snyder",
+   "M Snyder",
    "M Gerstein"
   ],
   "date": "2003-06-25",
@@ -4448,7 +4447,7 @@
   "pmid": "8976552",
   "title": "Protein clefts in molecular recognition and function",
   "type": "article",
-  "venue": "PubMed",
+  "venue": "PubMed Central",
   "volume": "5",
   "year": 1996
  }
